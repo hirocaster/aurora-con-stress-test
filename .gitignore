@@ -4,3 +4,4 @@ stress-test
 # Logs
 *.log
 *.jsonl
+.python-version
