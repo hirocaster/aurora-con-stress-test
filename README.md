@@ -68,6 +68,24 @@ go build -o stress-test main.go
 python3 analyze.py aggregate.jsonl
 ```
 
+### `analyze.py` 出力項目の解説
+```text
+[2024-05-01 10:00:00] Attempts: 320   | TPS:   32.0 | Overall Success: 100.00% | Conn Success: 100.00%
+    Latency (ms) p90/p99 -> Conn: 15/45 | Query: 5/12 | Total: 22/58
+```
+- **Attempts**: この時間バケット内で試行された「connect → query → disconnect」の総サイクル数。
+- **TPS**: 1秒あたりのスループット (Throughput Per Second)。
+- **Overall Success**: 「接続」「クエリ」「切断」のすべてが成功した割合。100%未満の場合は何らかのエラーが発生しています。
+- **Conn Success**: 最初の「TCP接続とDB認証」に成功した割合。
+- **Latency (ms) p90/p99**:
+  - `p90`: 90%の通信がこの時間(ms)以内に完了した。
+  - `p99`: 99%の通信がこの時間(ms)以内に完了した（一番遅かった異常値を見るのに最適）。
+  - `Conn`: 接続〜認証完了までの時間。
+  - `Query`: クエリの実行時間。
+  - `Total`: 一連のフルサイクル（接続〜切断）の時間。
+
+*※ テスト時間終了時に発生する強制切断エラー（Context キャンセルによる `invalid connection` など）は、ノイズを防ぐため自動的に集計から除外され、エラーとしてもカウントされません。*
+
 ### `analyze.py` の便利なフィルタ機能
 長期間のテストログから「パフォーマンスが悪化したポイント」だけを素早く探すためのオプションが用意されています。
 
