@@ -6,13 +6,14 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
+	"io"
 	"log"
 	"os"
 	"sort"
 	"sync"
 	"time"
 
-	_ "github.com/go-sql-driver/mysql"
+	"github.com/go-sql-driver/mysql"
 )
 
 type Config struct {
@@ -301,6 +302,10 @@ func runTrial(ctx context.Context, workerID int, attemptID int64, dsn string, cf
 	}
 
 	defer func() {
+		// テスト時間が終了してキャンセルされた場合は、終了間際のノイズ（エラー）として記録しない
+		if ctx.Err() != nil {
+			return
+		}
 		total := time.Since(startTotal).Milliseconds()
 		res.TotalLatencyMs = &total
 		results <- res
@@ -414,6 +419,7 @@ func spikeManager(ctx context.Context, cfg Config, results chan<- TrialResult, w
 }
 
 func main() {
+	mysql.SetLogger(log.New(io.Discard, "", 0))
 	cfg := Config{}
 	flag.StringVar(&cfg.Host, "host", "127.0.0.1", "Target MySQL host")
 	flag.IntVar(&cfg.Port, "port", 3306, "Target MySQL port")
