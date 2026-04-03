@@ -57,14 +57,18 @@ go build -o stress-test main.go
   -aggregate_log_path "aggregate.jsonl" \
   -error_log_path "error.jsonl" \
   -connect_timeout 5s \
-  -query_timeout 10s
+  -query_timeout 10s \
+  -dial_timeout 5s \
+  -tls_mode "true"
 ```
 
 ### パラメータ
 - `-concurrency`: 並列ワーカー数（ゴルーチン数）
 - `-duration`: 試験の実施時間（例: `10m`, `1h`）
 - `-aggregate_window`: ログを集約する時間バケット幅（例: `1s`, `10s`, `1m`）
-- `-sleep_between_attempts_ms`: 次の試行までのスリープ時間(ミリ秒)
+- `-sleep_between_attempts`: 次の試行までのスリープ時間（例: `10ms`, `1s`）
+- `-dial_timeout`: TCP接続のタイムアウト時間（例: `5s`）
+- `-tls_mode`: TLS接続モード（`''`: 無効, `'true'`: 有効, `'skip-verify'`: 証明書検証スキップ, `'custom'`: カスタムTLS）
 
 #### コネクションストーム（スパイク）のシミュレーション
 - `-spike_concurrency`: スパイク時に追加で発生させる同時接続数
@@ -137,7 +141,7 @@ AURORA STRESS TEST AGGREGATE ANALYSIS REPORT
 [2024-05-01 10:00:10] Attempts: 315   | TPS:   31.5 | Overall Success:  98.50% | Conn Success: 100.00%
     Latency (ms) p90/p99 -> Conn: 25/80 | Query: 6/15 | Total: 35/99
     Failures: {'query': 5}
-    Errors:   {'Error 1205: Lock wait timeout exceeded; try rest...': 5}
+    Errors:   {'dial tcp 127.0.0.1:3306: i/o timeout': 5}
 ----------------------------------------------------------------------
 ```
 
