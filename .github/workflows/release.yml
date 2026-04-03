@@ -35,7 +35,7 @@ jobs:
           if [ "${{ matrix.goos }}" = "windows" ]; then
             BINARY_NAME=${BINARY_NAME}.exe
           fi
-          go build -o dist/${BINARY_NAME}-${{ matrix.goos }}-${{ matrix.goarch }} main.go
+          go build -ldflags="-s -w -X main.Version=${{ github.ref_name }}" -o dist/${BINARY_NAME}-${{ matrix.goos }}-${{ matrix.goarch }} main.go
 
       - name: Release
         uses: softprops/action-gh-release@v2

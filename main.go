@@ -20,6 +20,8 @@ import (
 	"github.com/go-sql-driver/mysql"
 )
 
+var Version = "0.1.0"
+
 type Config struct {
 	Host                 string
 	Port                 int
@@ -541,6 +543,7 @@ func spikeManager(ctx context.Context, cfg Config, dsn string, results chan<- Tr
 
 func main() {
 	mysql.SetLogger(log.New(io.Discard, "", 0))
+	versionFlag := flag.Bool("version", false, "Print version and exit")
 	cfg := Config{}
 	flag.StringVar(&cfg.Host, "host", "127.0.0.1", "Target MySQL host")
 	flag.IntVar(&cfg.Port, "port", 3306, "Target MySQL port")
@@ -566,6 +569,11 @@ func main() {
 	flag.DurationVar(&cfg.SpikeInterval, "spike_interval", 0, "Interval between spikes")
 
 	flag.Parse()
+
+	if *versionFlag {
+		fmt.Printf("aurora-con-stress-test version %s\n", Version)
+		os.Exit(0)
+	}
 
 	// Build DSN
 	tlsParam := ""
