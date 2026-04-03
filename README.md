@@ -68,7 +68,25 @@ go build -o stress-test main.go
 python3 analyze.py aggregate.jsonl
 ```
 
-### `analyze.py` 実行例
+### `analyze.py` の便利なフィルタ機能
+長期間のテストログから「パフォーマンスが悪化したポイント」だけを素早く探すためのオプションが用意されています。
+
+**① エラーが発生した時間帯のみ抽出**
+```bash
+python3 analyze.py aggregate.jsonl --errors-only
+```
+（成功率が100%の時間帯をスキップし、エラーが起きたバケットのみを表示します）
+
+**② レイテンシが悪化した時間帯のみ抽出**
+```bash
+python3 analyze.py aggregate.jsonl --latency-threshold 100
+```
+（全体のレイテンシの p99 が 100ms を超えた時間帯のみを表示します）
+
+### コネクションレイテンシの集計について
+本ツールは「コネクションプーリングを無効化」し、1試行ごとに毎回 `sql.Open -> db.Ping -> db.Query -> db.Close` を行っています。
+そのため、DBが大量の新規接続（スパイク）を受けて「接続を出し渋る（Acceptキューが詰まるなど）」といった事象が発生した場合、それは明確に **`Conn` (Connect Latency) の悪化** として集約ログ（p90/p99/max 等）に記録されます。
+
 ```text
 ======================================================================
 AURORA STRESS TEST AGGREGATE ANALYSIS REPORT
