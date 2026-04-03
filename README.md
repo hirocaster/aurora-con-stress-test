@@ -1,4 +1,4 @@
-# Aurora MySQL 短命接続ストレステストツール (v2 - 集約ログ対応版)
+# Aurora MySQL 短命接続ストレステストツール
 
 「毎回 connect -> SQL実行 -> disconnect」を繰り返し、新規接続のレイテンシや短命接続時の成功率、および時間帯ごとのパフォーマンス劣化（connection storm等の影響）を計測するためのツールです。
 
