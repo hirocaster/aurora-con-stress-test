@@ -82,3 +82,35 @@ AURORA STRESS TEST AGGREGATE ANALYSIS REPORT
     Errors:   {'Error 1205: Lock wait timeout exceeded; try rest...': 5}
 ----------------------------------------------------------------------
 ```
+
+## ⚠️ 長時間（数日〜1週間）負荷をかける際の注意事項
+
+長期間の負荷テスト（例: `-duration 168h`）を実施する際は、以下の点に注意してください。
+
+### 1. `aggregate_window`（時間バケット）の適切な設定
+数日間にわたるテストの場合、`-aggregate_window` を短くしすぎると（例: `1s`）、ログが肥大化します。
+長期間テストの場合は **`10s` または `1m`** に設定することを推奨します。
+（`1m` の場合、1時間で60行、1週間で約10,000行、数MB程度のサイズに収まります）
+
+### 2. エラーログ (`error.jsonl`) の肥大化リスク
+本ツールは「成功した試行の詳細は出力せず、**失敗した試行のみ** 詳細を `error.jsonl` に出力」します。
+通常はサイズ0のままですが、Auroraが完全にダウンし数万件の接続エラーが継続して発生するような事態に陥った場合、`error.jsonl` が急速に肥大化（数GBなど）する可能性があります。ディスク容量に余裕のあるパーティションで実行してください。
+
+### 3. バックグラウンドでの実行
+SSH接続を切ってもテストが継続するよう、`nohup` や `tmux`、`screen` などを利用して実行してください。
+
+**長時間実行用コマンド例 (1週間稼働):**
+```bash
+nohup ./stress-test \
+  -host "your-aurora-cluster.rds.amazonaws.com" \
+  -user "admin" \
+  -password "secret" \
+  -database "mydb" \
+  -concurrency 100 \
+  -duration 168h \
+  -aggregate_window 1m \
+  -spike_interval 5m \
+  -spike_duration 10s \
+  -spike_concurrency 500 \
+  > stress-test.log 2>&1 &
+```
