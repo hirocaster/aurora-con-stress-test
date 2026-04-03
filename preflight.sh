@@ -34,6 +34,31 @@ function check_value() {
     echo ""
 }
 
+function check_value_reverse() {
+    local name="$1"
+    local current="$2"
+    local recommended="$3"
+    local severity="$4"
+    local reason="$5"
+    local fix="$6"
+
+    printf "%-30s: %s\n" "$name" "$current"
+    if [ "$current" -gt "$recommended" ]; then
+        if [ "$severity" == "WARN" ]; then
+            echo -e "  -> \e[33m[WARN]\e[0m (Recommended: <= $recommended)"
+            ((warn_count++))
+        else
+            echo -e "  -> \e[31m[NG]\e[0m (Recommended: <= $recommended)"
+            ((ng_count++))
+        fi
+        echo "     Reason: $reason"
+        echo "     Fix:    $fix"
+    else
+        echo -e "  -> \e[32m[OK]\e[0m"
+    fi
+    echo ""
+}
+
 # 1. CPU / Memory
 cpus=$(nproc)
 mem_kb=$(awk '/MemTotal/ {print $2}' /proc/meminfo)
@@ -60,8 +85,8 @@ check_value "Ephemeral port range size" "$port_range" 40000 "NG" \
 
 # 4. TIME_WAIT and TCP reuse
 tcp_fin_timeout=$(cat /proc/sys/net/ipv4/tcp_fin_timeout)
-check_value "tcp_fin_timeout" "$tcp_fin_timeout" 15 "WARN" \
-    "短命接続では大量のソケットが TIME_WAIT 状態になります。タイムアウトが長い(>15s)とポート枯渇の原因になります。(逆評価: 小さい方が良い)" \
+check_value_reverse "tcp_fin_timeout" "$tcp_fin_timeout" 15 "WARN" \
+    "短命接続では大量のソケットが TIME_WAIT 状態になります。タイムアウトが長い(>15s)とポート枯渇の原因になります。" \
     "sysctl -w net.ipv4.tcp_fin_timeout=15"
 
 tcp_tw_reuse=$(cat /proc/sys/net/ipv4/tcp_tw_reuse)
@@ -104,9 +129,33 @@ check_value "tcp_wmem (max)" "$tcp_wmem_max" 16777216 "WARN" \
     "TCP送信バッファの最大サイズです。高並列時にパフォーマンスが低下する可能性があります。" \
     "sysctl -w net.ipv4.tcp_wmem='4096 65536 16777216'"
 
-# 7. Current Socket Status (ss)
+# 7. Advanced Connection Checks
+# nf_conntrack might not be loaded, check if the sysctl exists
+if sysctl net.netfilter.nf_conntrack_max >/dev/null 2>&1; then
+    nf_conntrack_max=$(cat /proc/sys/net/netfilter/nf_conntrack_max 2>/dev/null || cat /proc/sys/net/ipv4/netfilter/ip_conntrack_max 2>/dev/null)
+    if [ -n "$nf_conntrack_max" ]; then
+        check_value "nf_conntrack_max" "$nf_conntrack_max" 262144 "WARN" \
+            "コネクショントラッキング(iptables等)の最大管理数です。上限に達するとパケットが破棄されます。" \
+            "sysctl -w net.netfilter.nf_conntrack_max=262144"
+    fi
+fi
+
+if [ -f /proc/sys/net/ipv4/tcp_max_tw_buckets ]; then
+    tcp_max_tw_buckets=$(cat /proc/sys/net/ipv4/tcp_max_tw_buckets)
+    check_value "tcp_max_tw_buckets" "$tcp_max_tw_buckets" 262144 "WARN" \
+        "TIME_WAITソケットの最大許容数です。短命接続が多い場合は上限を引き上げないとエラーの元になります。" \
+        "sysctl -w net.ipv4.tcp_max_tw_buckets=262144"
+fi
+
+# 8. Current Socket Status (ss)
 echo "Current Socket Status:"
 ss -s | grep -E "Total|TCP:|TIME-WAIT" | sed 's/^/  /'
+echo ""
+
+tw_count=$(ss -tan state time-wait | tail -n +2 | wc -l)
+established_count=$(ss -tan state established | tail -n +2 | wc -l)
+printf "%-30s: %s\n" "TIME_WAIT sockets" "$tw_count"
+printf "%-30s: %s\n" "ESTABLISHED sockets" "$established_count"
 echo ""
 
 echo "======================================================="
