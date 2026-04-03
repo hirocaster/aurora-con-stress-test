@@ -83,7 +83,28 @@ check_value "tcp_max_syn_backlog" "$tcp_max_syn_backlog" 1024 "WARN" \
     "SYNを受信して未完了の接続キューの最大値です。" \
     "sysctl -w net.ipv4.tcp_max_syn_backlog=2048"
 
-# 6. Current Socket Status (ss)
+# 6. Network Buffers
+rmem_max=$(cat /proc/sys/net/core/rmem_max)
+check_value "rmem_max" "$rmem_max" 16777216 "WARN" \
+    "ソケットの受信バッファの最大サイズです。数万のコネクションを張る際に不足する可能性があります。" \
+    "sysctl -w net.core.rmem_max=16777216"
+
+wmem_max=$(cat /proc/sys/net/core/wmem_max)
+check_value "wmem_max" "$wmem_max" 16777216 "WARN" \
+    "ソケットの送信バッファの最大サイズです。数万のコネクションを張る際に不足する可能性があります。" \
+    "sysctl -w net.core.wmem_max=16777216"
+
+tcp_rmem_max=$(cat /proc/sys/net/ipv4/tcp_rmem | awk '{print $3}')
+check_value "tcp_rmem (max)" "$tcp_rmem_max" 16777216 "WARN" \
+    "TCP受信バッファの最大サイズです。高並列時にパフォーマンスが低下する可能性があります。" \
+    "sysctl -w net.ipv4.tcp_rmem='4096 87380 16777216'"
+
+tcp_wmem_max=$(cat /proc/sys/net/ipv4/tcp_wmem | awk '{print $3}')
+check_value "tcp_wmem (max)" "$tcp_wmem_max" 16777216 "WARN" \
+    "TCP送信バッファの最大サイズです。高並列時にパフォーマンスが低下する可能性があります。" \
+    "sysctl -w net.ipv4.tcp_wmem='4096 65536 16777216'"
+
+# 7. Current Socket Status (ss)
 echo "Current Socket Status:"
 ss -s | grep -E "Total|TCP:|TIME-WAIT" | sed 's/^/  /'
 echo ""
