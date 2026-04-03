@@ -31,6 +31,11 @@ type Config struct {
 	ErrorLogPath         string
 	AggregateWindow      time.Duration
 	SleepBetweenAttempts time.Duration
+	
+	// Spike settings
+	SpikeConcurrency     int
+	SpikeDuration        time.Duration
+	SpikeInterval        time.Duration
 }
 
 type TrialResult struct {
@@ -166,7 +171,7 @@ func aggregator(ctx context.Context, cfg Config, results <-chan TrialResult, wg 
 			BucketStart:           bucketStart,
 			BucketEnd:             now,
 			RunID:                 cfg.RunID,
-			ConfiguredConcurrency: cfg.Concurrency,
+			ConfiguredConcurrency: cfg.Concurrency, // Base concurrency
 			Attempts:              len(currentBucket),
 			FailurePhaseCounts:    make(map[string]int),
 			ErrorTypeCounts:       make(map[string]int),
@@ -371,6 +376,43 @@ func runTrial(ctx context.Context, workerID int, attemptID int64, dsn string, cf
 	res.Success = true
 }
 
+func spikeManager(ctx context.Context, cfg Config, results chan<- TrialResult, wg *sync.WaitGroup) {
+	defer wg.Done()
+	if cfg.SpikeConcurrency <= 0 || cfg.SpikeInterval <= 0 || cfg.SpikeDuration <= 0 {
+		return
+	}
+
+	ticker := time.NewTicker(cfg.SpikeInterval)
+	defer ticker.Stop()
+
+	for {
+		select {
+		case <-ctx.Done():
+			return
+		case <-ticker.C:
+			log.Printf("🔥 SPIKE TRIGGERED: Starting %d additional concurrent workers for %s", cfg.SpikeConcurrency, cfg.SpikeDuration)
+			spikeCtx, spikeCancel := context.WithTimeout(ctx, cfg.SpikeDuration)
+			
+			var spikeWg sync.WaitGroup
+			for i := 0; i < cfg.SpikeConcurrency; i++ {
+				spikeWg.Add(1)
+				wg.Add(1) // Track in main wait group to prevent channel closing too early
+				go func(workerID int) {
+					defer wg.Done()
+					worker(spikeCtx, workerID, cfg, results, &spikeWg)
+				}(cfg.Concurrency + i)
+			}
+			
+			// Wait and cleanup in background to not block the next spike
+			go func() {
+				spikeWg.Wait()
+				spikeCancel()
+				log.Printf("📉 SPIKE ENDED: Additional workers stopped.")
+			}()
+		}
+	}
+}
+
 func main() {
 	cfg := Config{}
 	flag.StringVar(&cfg.Host, "host", "127.0.0.1", "Target MySQL host")
@@ -388,15 +430,25 @@ func main() {
 	flag.StringVar(&cfg.ErrorLogPath, "error_log_path", "error.jsonl", "Path to output error detailed log")
 	flag.DurationVar(&cfg.AggregateWindow, "aggregate_window", 10*time.Second, "Time window for aggregation bucket (1s, 10s, 1m)")
 	flag.DurationVar(&cfg.SleepBetweenAttempts, "sleep_between_attempts_ms", 0, "Sleep between attempts")
+
+	// Spike options
+	flag.IntVar(&cfg.SpikeConcurrency, "spike_concurrency", 0, "Additional concurrency during a spike")
+	flag.DurationVar(&cfg.SpikeDuration, "spike_duration", 0, "Duration of the spike")
+	flag.DurationVar(&cfg.SpikeInterval, "spike_interval", 0, "Interval between spikes")
+
 	flag.Parse()
 
 	log.Printf("Starting stress test v2 against %s:%d", cfg.Host, cfg.Port)
-	log.Printf("Run ID: %s, Concurrency: %d, Duration: %s, Window: %s", cfg.RunID, cfg.Concurrency, cfg.Duration, cfg.AggregateWindow)
+	log.Printf("Run ID: %s, Base Concurrency: %d, Duration: %s, Window: %s", cfg.RunID, cfg.Concurrency, cfg.Duration, cfg.AggregateWindow)
+	
+	if cfg.SpikeConcurrency > 0 {
+		log.Printf("Spike Config: +%d workers for %s every %s", cfg.SpikeConcurrency, cfg.SpikeDuration, cfg.SpikeInterval)
+	}
 
 	ctx, cancel := context.WithTimeout(context.Background(), cfg.Duration)
 	defer cancel()
 
-	results := make(chan TrialResult, cfg.Concurrency*100)
+	results := make(chan TrialResult, (cfg.Concurrency+cfg.SpikeConcurrency)*100)
 
 	var aggWg sync.WaitGroup
 	aggWg.Add(1)
@@ -406,6 +458,11 @@ func main() {
 	for i := 0; i < cfg.Concurrency; i++ {
 		workerWg.Add(1)
 		go worker(ctx, i, cfg, results, &workerWg)
+	}
+
+	if cfg.SpikeConcurrency > 0 && cfg.SpikeDuration > 0 && cfg.SpikeInterval > 0 {
+		workerWg.Add(1)
+		go spikeManager(ctx, cfg, results, &workerWg)
 	}
 
 	workerWg.Wait()

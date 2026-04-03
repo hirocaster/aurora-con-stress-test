@@ -54,6 +54,12 @@ go build -o stress-test main.go
 - `-aggregate_window`: ログを集約する時間バケット幅（例: `1s`, `10s`, `1m`）
 - `-sleep_between_attempts_ms`: 次の試行までのスリープ時間(ミリ秒)
 
+#### コネクションストーム（スパイク）のシミュレーション
+- `-spike_concurrency`: スパイク時に追加で発生させる同時接続数
+- `-spike_duration`: スパイクの継続時間（例: `5s`）
+- `-spike_interval`: スパイクを発生させる間隔（例: `1m`）
+※ 普段は `-concurrency` の数で負荷をかけつつ、`-spike_interval` 経過毎に `-spike_duration` の間だけ `-spike_concurrency` 個のワーカーが追加で一斉に接続を行います。
+
 ## ログの確認
 集約ログは1バケット1行の JSON Lines で出力されます。
 これを同梱の Python スクリプトで簡単に視覚化できます。
