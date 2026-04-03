@@ -6,6 +6,8 @@ from datetime import datetime
 def main():
     parser = argparse.ArgumentParser(description="Analyze Aurora stress test aggregate logs")
     parser.add_argument("log_file", help="Path to the JSON Lines aggregate log file")
+    parser.add_argument("--errors-only", action="store_true", help="Only show buckets with errors/failures")
+    parser.add_argument("--latency-threshold", type=int, help="Only show buckets where Total p99 latency (ms) exceeds this value")
     args = parser.parse_args()
 
     print("=" * 70)
@@ -22,6 +24,16 @@ def main():
                 except json.JSONDecodeError:
                     continue
                 
+                # Check filters
+                overall_rate = stats.get('overall_success_rate', 0) * 100
+                tot_p99 = stats.get('total_p99_ms', 0)
+
+                if args.errors_only and overall_rate == 100.0:
+                    continue
+                
+                if args.latency_threshold is not None and tot_p99 <= args.latency_threshold:
+                    continue
+
                 start_ts = stats.get('bucket_start', '')
                 end_ts = stats.get('bucket_end', '')
                 try:
