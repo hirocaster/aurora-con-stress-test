@@ -31,7 +31,7 @@ jobs:
           GOARCH: ${{ matrix.goarch }}
         run: |
           mkdir -p dist
-          BINARY_NAME=aurora-stress-test
+          BINARY_NAME=aurora-con-stress-test
           if [ "${{ matrix.goos }}" = "windows" ]; then
             BINARY_NAME=${BINARY_NAME}.exe
           fi

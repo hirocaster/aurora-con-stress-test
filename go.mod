@@ -1,4 +1,4 @@
-module github.com/hirocaster/aurora-stress-test-v2
+module github.com/hirocaster/aurora-con-stress-test
 
 go 1.20
 

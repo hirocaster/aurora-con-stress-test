@@ -14,7 +14,7 @@
 
 ## 準備とビルド
 ```bash
-cd aurora-stress-test-v2
+cd aurora-con-stress-test
 chmod +x preflight.sh
 
 # 依存パッケージをダウンロード
