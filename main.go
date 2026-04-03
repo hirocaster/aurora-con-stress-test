@@ -2,15 +2,19 @@ package main
 
 import (
 	"context"
+	"crypto/tls"
 	"database/sql"
 	"encoding/json"
+	"errors"
 	"flag"
 	"fmt"
 	"io"
 	"log"
+	"math"
 	"os"
 	"sort"
 	"sync"
+	"sync/atomic"
 	"time"
 
 	"github.com/go-sql-driver/mysql"
@@ -27,51 +31,60 @@ type Config struct {
 	Duration             time.Duration
 	ConnectTimeout       time.Duration
 	QueryTimeout         time.Duration
+	DialTimeout          time.Duration
+	TLSMode              string
 	RunID                string
 	AggregateLogPath     string
 	ErrorLogPath         string
 	AggregateWindow      time.Duration
 	SleepBetweenAttempts time.Duration
-	
+
 	// Spike settings
-	SpikeConcurrency     int
-	SpikeDuration        time.Duration
-	SpikeInterval        time.Duration
+	SpikeConcurrency int
+	SpikeDuration    time.Duration
+	SpikeInterval    time.Duration
 }
 
 type TrialResult struct {
-	Timestamp          time.Time
-	WorkerID           int
-	AttemptID          int64
-	ConnectLatencyMs   *int64
-	QueryLatencyMs     *int64
+	Timestamp           time.Time
+	WorkerID            int
+	AttemptID           int64
+	ConnectLatencyMs    *int64
+	QueryLatencyMs      *int64
 	DisconnectLatencyMs *int64
-	TotalLatencyMs     *int64
-	Success            bool
-	FailurePhase       *string
-	ErrorMessage       *string
+	TotalLatencyMs      *int64
+	Success             bool
+	FailurePhase        *string
+	ErrorType           *string
+	ErrorCode           *int
+	ErrorMessage        *string
 }
 
 type BucketStats struct {
-	BucketStart            time.Time `json:"bucket_start"`
-	BucketEnd              time.Time `json:"bucket_end"`
-	RunID                  string    `json:"run_id"`
-	ConfiguredConcurrency  int       `json:"configured_concurrency"`
-	Attempts               int       `json:"attempts"`
-	ConnectSuccessCount    int       `json:"connect_success_count"`
-	ConnectFailureCount    int       `json:"connect_failure_count"`
-	QuerySuccessCount      int       `json:"query_success_count"`
-	QueryFailureCount      int       `json:"query_failure_count"`
-	DisconnectSuccessCount int       `json:"disconnect_success_count"`
-	DisconnectFailureCount int       `json:"disconnect_failure_count"`
-	OverallSuccessCount    int       `json:"overall_success_count"`
-	OverallFailureCount    int       `json:"overall_failure_count"`
+	BucketStart           time.Time `json:"bucket_start"`
+	BucketEnd             time.Time `json:"bucket_end"`
+	RunID                 string    `json:"run_id"`
+	ConfiguredConcurrency int       `json:"configured_concurrency"`
+	ActiveConcurrency     int64     `json:"active_concurrency"`
+	Attempts              int       `json:"attempts"`
+	ConnectSuccessCount   int       `json:"connect_success_count"`
+	ConnectFailureCount   int       `json:"connect_failure_count"`
+	QuerySuccessCount     int       `json:"query_success_count"`
+	QueryFailureCount     int       `json:"query_failure_count"`
+	DisconnectSuccessCount int      `json:"disconnect_success_count"`
+	DisconnectFailureCount int      `json:"disconnect_failure_count"`
+	OverallSuccessCount   int       `json:"overall_success_count"`
+	OverallFailureCount   int       `json:"overall_failure_count"`
 
-	ConnectSuccessRate    float64 `json:"connect_success_rate"`
-	QuerySuccessRate      float64 `json:"query_success_rate"`
-	DisconnectSuccessRate float64 `json:"disconnect_success_rate"`
-	OverallSuccessRate    float64 `json:"overall_success_rate"`
-	ThroughputPerSec      float64 `json:"throughput_per_sec"`
+	ConnectSuccessRate    *float64 `json:"connect_success_rate"`
+	QuerySuccessRate      *float64 `json:"query_success_rate"`
+	DisconnectSuccessRate *float64 `json:"disconnect_success_rate"`
+	OverallSuccessRate    *float64 `json:"overall_success_rate"`
+
+	// throughput_per_sec = バケット内の全試行数（失敗含む）/ バケット秒数
+	// 失敗試行もサーバへの接続試行であり負荷を反映するため、全試行を含める。
+	// 成功のみのスループットは overall_success_rate × throughput_per_sec で算出可能。
+	ThroughputPerSec float64 `json:"throughput_per_sec"`
 
 	ConnectAvgMs float64 `json:"connect_avg_ms"`
 	ConnectP50Ms int64   `json:"connect_p50_ms"`
@@ -106,6 +119,8 @@ type ErrorLog struct {
 	TargetHost          string `json:"target_host"`
 	TargetPort          int    `json:"target_port"`
 	FailurePhase        string `json:"failure_phase"`
+	ErrorType           string `json:"error_type"`
+	ErrorCode           *int   `json:"error_code"`
 	ErrorMessage        string `json:"error_message"`
 	ConnectLatencyMs    *int64 `json:"connect_latency_ms"`
 	QueryLatencyMs      *int64 `json:"query_latency_ms"`
@@ -113,27 +128,76 @@ type ErrorLog struct {
 	TotalLatencyMs      *int64 `json:"total_latency_ms"`
 }
 
+// classifyError extracts error_type and error_code from MySQL driver errors.
+func classifyError(err error) (errorType string, errorCode *int) {
+	var mysqlErr *mysql.MySQLError
+	if errors.As(err, &mysqlErr) {
+		errorType = "mysql_error"
+		code := int(mysqlErr.Number)
+		errorCode = &code
+		return
+	}
+
+	errMsg := err.Error()
+	// Classify common non-MySQL errors
+	switch {
+	case containsAny(errMsg, "timeout", "deadline exceeded"):
+		errorType = "timeout"
+	case containsAny(errMsg, "connection refused", "connect: connection refused"):
+		errorType = "connection_refused"
+	case containsAny(errMsg, "no such host", "lookup"):
+		errorType = "dns_error"
+	case containsAny(errMsg, "too many connections"):
+		errorType = "too_many_connections"
+	case containsAny(errMsg, "broken pipe", "connection reset"):
+		errorType = "connection_reset"
+	case containsAny(errMsg, "cannot assign requested address"):
+		errorType = "port_exhaustion"
+	default:
+		errorType = "unknown"
+	}
+	return
+}
+
+func containsAny(s string, substrs ...string) bool {
+	for _, sub := range substrs {
+		if len(s) >= len(sub) {
+			for i := 0; i <= len(s)-len(sub); i++ {
+				if s[i:i+len(sub)] == sub {
+					return true
+				}
+			}
+		}
+	}
+	return false
+}
+
 func calcPercentiles(latencies []int64) (avg float64, p50, p90, p95, p99, max int64) {
 	if len(latencies) == 0 {
 		return 0, 0, 0, 0, 0, 0
 	}
 	sort.Slice(latencies, func(i, j int) bool { return latencies[i] < latencies[j] })
-	
+
 	var sum int64
 	for _, l := range latencies {
 		sum += l
 	}
 	avg = float64(sum) / float64(len(latencies))
-	
-	n := float64(len(latencies))
-	p50 = latencies[int(n*0.50)]
-	p90 = latencies[int(n*0.90)]
-	p95 = latencies[int(n*0.95)]
-	p99 = latencies[int(n*0.99)]
-	max = latencies[len(latencies)-1]
-	
+
+	last := len(latencies) - 1
+	p50 = latencies[int(math.Min(float64(int(float64(len(latencies))*0.50)), float64(last)))]
+	p90 = latencies[int(math.Min(float64(int(float64(len(latencies))*0.90)), float64(last)))]
+	p95 = latencies[int(math.Min(float64(int(float64(len(latencies))*0.95)), float64(last)))]
+	p99 = latencies[int(math.Min(float64(int(float64(len(latencies))*0.99)), float64(last)))]
+	max = latencies[last]
+
 	return
 }
+
+func floatPtr(v float64) *float64 { return &v }
+
+// activeConcurrency tracks the number of currently active workers (base + spike).
+var activeConcurrency int64
 
 func aggregator(ctx context.Context, cfg Config, results <-chan TrialResult, wg *sync.WaitGroup) {
 	defer wg.Done()
@@ -159,41 +223,51 @@ func aggregator(ctx context.Context, cfg Config, results <-chan TrialResult, wg 
 	ticker := time.NewTicker(cfg.AggregateWindow)
 	defer ticker.Stop()
 
-	var currentBucket []TrialResult
-	bucketStart := time.Now()
+	// buckets maps bucket start time to the list of results for that bucket.
+	// This ensures each result is assigned to the correct bucket based on its timestamp.
+	buckets := make(map[time.Time][]TrialResult)
+	bucketDuration := cfg.AggregateWindow
 
-	flushBucket := func(now time.Time) {
-		if len(currentBucket) == 0 {
-			bucketStart = now
+	// getBucketStart returns the start time of the bucket that the given timestamp belongs to.
+	getBucketStart := func(t time.Time) time.Time {
+		return t.Truncate(bucketDuration)
+	}
+
+	flushBucket := func(bucketStart time.Time, bucket []TrialResult) {
+		if len(bucket) == 0 {
 			return
 		}
 
+		bucketEnd := bucketStart.Add(bucketDuration)
 		stats := BucketStats{
 			BucketStart:           bucketStart,
-			BucketEnd:             now,
+			BucketEnd:             bucketEnd,
 			RunID:                 cfg.RunID,
-			ConfiguredConcurrency: cfg.Concurrency, // Base concurrency
-			Attempts:              len(currentBucket),
+			ConfiguredConcurrency: cfg.Concurrency,
+			ActiveConcurrency:     atomic.LoadInt64(&activeConcurrency),
+			Attempts:              len(bucket),
 			FailurePhaseCounts:    make(map[string]int),
 			ErrorTypeCounts:       make(map[string]int),
 		}
 
 		var connLatencies, queryLatencies, totalLatencies []int64
 
-		for _, r := range currentBucket {
+		for _, r := range bucket {
 			if r.Success {
 				stats.OverallSuccessCount++
 				stats.ConnectSuccessCount++
 				stats.QuerySuccessCount++
 				stats.DisconnectSuccessCount++
-				
+
 				connLatencies = append(connLatencies, *r.ConnectLatencyMs)
 				queryLatencies = append(queryLatencies, *r.QueryLatencyMs)
 				totalLatencies = append(totalLatencies, *r.TotalLatencyMs)
 			} else {
 				stats.OverallFailureCount++
 				stats.FailurePhaseCounts[*r.FailurePhase]++
-				stats.ErrorTypeCounts[*r.ErrorMessage]++
+				if r.ErrorType != nil {
+					stats.ErrorTypeCounts[*r.ErrorType]++
+				}
 
 				if *r.FailurePhase == "connect" {
 					stats.ConnectFailureCount++
@@ -218,7 +292,9 @@ func aggregator(ctx context.Context, cfg Config, results <-chan TrialResult, wg 
 						TargetHost:          cfg.Host,
 						TargetPort:          cfg.Port,
 						FailurePhase:        *r.FailurePhase,
-						ErrorMessage:        *r.ErrorMessage,
+						ErrorType:           derefStr(r.ErrorType),
+						ErrorCode:           r.ErrorCode,
+						ErrorMessage:        derefStr(r.ErrorMessage),
 						ConnectLatencyMs:    r.ConnectLatencyMs,
 						QueryLatencyMs:      r.QueryLatencyMs,
 						DisconnectLatencyMs: r.DisconnectLatencyMs,
@@ -229,16 +305,19 @@ func aggregator(ctx context.Context, cfg Config, results <-chan TrialResult, wg 
 			}
 		}
 
-		stats.ConnectSuccessRate = float64(stats.ConnectSuccessCount) / float64(stats.Attempts)
+		// Success rates: use *float64 to distinguish 0% from N/A (null)
+		if stats.Attempts > 0 {
+			stats.ConnectSuccessRate = floatPtr(float64(stats.ConnectSuccessCount) / float64(stats.Attempts))
+			stats.OverallSuccessRate = floatPtr(float64(stats.OverallSuccessCount) / float64(stats.Attempts))
+		}
 		if stats.ConnectSuccessCount > 0 {
-			stats.QuerySuccessRate = float64(stats.QuerySuccessCount) / float64(stats.ConnectSuccessCount)
+			stats.QuerySuccessRate = floatPtr(float64(stats.QuerySuccessCount) / float64(stats.ConnectSuccessCount))
 		}
 		if stats.QuerySuccessCount > 0 {
-			stats.DisconnectSuccessRate = float64(stats.DisconnectSuccessCount) / float64(stats.QuerySuccessCount)
+			stats.DisconnectSuccessRate = floatPtr(float64(stats.DisconnectSuccessCount) / float64(stats.QuerySuccessCount))
 		}
-		stats.OverallSuccessRate = float64(stats.OverallSuccessCount) / float64(stats.Attempts)
-		
-		durationSecs := now.Sub(bucketStart).Seconds()
+
+		durationSecs := bucketEnd.Sub(bucketStart).Seconds()
 		if durationSecs > 0 {
 			stats.ThroughputPerSec = float64(stats.Attempts) / durationSecs
 		}
@@ -248,31 +327,54 @@ func aggregator(ctx context.Context, cfg Config, results <-chan TrialResult, wg 
 		stats.TotalAvgMs, stats.TotalP50Ms, stats.TotalP90Ms, stats.TotalP95Ms, stats.TotalP99Ms, stats.TotalMaxMs = calcPercentiles(totalLatencies)
 
 		aggEncoder.Encode(stats)
-
-		currentBucket = currentBucket[:0]
-		bucketStart = now
 	}
 
 	for {
 		select {
 		case r, ok := <-results:
 			if !ok {
-				flushBucket(time.Now())
+				// Channel closed: flush all remaining buckets in order
+				var keys []time.Time
+				for k := range buckets {
+					keys = append(keys, k)
+				}
+				sort.Slice(keys, func(i, j int) bool { return keys[i].Before(keys[j]) })
+				for _, k := range keys {
+					flushBucket(k, buckets[k])
+				}
 				return
 			}
-			currentBucket = append(currentBucket, r)
+			bs := getBucketStart(r.Timestamp)
+			buckets[bs] = append(buckets[bs], r)
 		case t := <-ticker.C:
-			flushBucket(t)
+			newBucketStart := getBucketStart(t)
+			// Flush all buckets that are older than the current ticker bucket
+			var keysToFlush []time.Time
+			for k := range buckets {
+				if k.Before(newBucketStart) {
+					keysToFlush = append(keysToFlush, k)
+				}
+			}
+			sort.Slice(keysToFlush, func(i, j int) bool { return keysToFlush[i].Before(keysToFlush[j]) })
+			for _, k := range keysToFlush {
+				flushBucket(k, buckets[k])
+				delete(buckets, k)
+			}
 		}
 	}
 }
 
-func worker(ctx context.Context, id int, cfg Config, results chan<- TrialResult, wg *sync.WaitGroup) {
-	defer wg.Done()
+func derefStr(s *string) string {
+	if s == nil {
+		return ""
+	}
+	return *s
+}
 
-	dsn := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?timeout=%s&readTimeout=%s&parseTime=true",
-		cfg.User, cfg.Password, cfg.Host, cfg.Port, cfg.Database,
-		cfg.ConnectTimeout.String(), cfg.QueryTimeout.String())
+func worker(ctx context.Context, id int, cfg Config, dsn string, results chan<- TrialResult, wg *sync.WaitGroup) {
+	defer wg.Done()
+	defer atomic.AddInt64(&activeConcurrency, -1)
+	atomic.AddInt64(&activeConcurrency, 1)
 
 	var attemptID int64 = 0
 
@@ -290,7 +392,9 @@ func worker(ctx context.Context, id int, cfg Config, results chan<- TrialResult,
 	}
 }
 
-func ptr(v int64) *int64 { return &v }
+func ptr(v int64) *int64       { return &v }
+func strPtr(v string) *string  { return &v }
+func intPtr(v int) *int        { return &v }
 
 func runTrial(ctx context.Context, workerID int, attemptID int64, dsn string, cfg Config, results chan<- TrialResult) {
 	startTotal := time.Now()
@@ -302,7 +406,7 @@ func runTrial(ctx context.Context, workerID int, attemptID int64, dsn string, cf
 	}
 
 	defer func() {
-		// テスト時間が終了してキャンセルされた場合は、終了間際のノイズ（エラー）として記録しない
+		// If the context (test duration) was cancelled, discard this noisy partial result
 		if ctx.Err() != nil {
 			return
 		}
@@ -317,11 +421,13 @@ func runTrial(ctx context.Context, workerID int, attemptID int64, dsn string, cf
 	if err != nil {
 		phase := "connect"
 		errMsg := err.Error()
+		errType, errCode := classifyError(err)
 		res.FailurePhase = &phase
 		res.ErrorMessage = &errMsg
+		res.ErrorType = &errType
+		res.ErrorCode = errCode
 		return
 	}
-	defer db.Close()
 
 	db.SetMaxOpenConns(1)
 	db.SetMaxIdleConns(0)
@@ -330,12 +436,16 @@ func runTrial(ctx context.Context, workerID int, attemptID int64, dsn string, cf
 	err = db.PingContext(ctx)
 	connLatency := time.Since(startConnect).Milliseconds()
 	res.ConnectLatencyMs = ptr(connLatency)
-	
+
 	if err != nil {
 		phase := "connect"
 		errMsg := err.Error()
+		errType, errCode := classifyError(err)
 		res.FailurePhase = &phase
 		res.ErrorMessage = &errMsg
+		res.ErrorType = &errType
+		res.ErrorCode = errCode
+		db.Close()
 		return
 	}
 
@@ -345,8 +455,12 @@ func runTrial(ctx context.Context, workerID int, attemptID int64, dsn string, cf
 	if err != nil {
 		phase := "query"
 		errMsg := err.Error()
+		errType, errCode := classifyError(err)
 		res.FailurePhase = &phase
 		res.ErrorMessage = &errMsg
+		res.ErrorType = &errType
+		res.ErrorCode = errCode
+		db.Close()
 		return
 	}
 	for rows.Next() {}
@@ -359,12 +473,16 @@ func runTrial(ctx context.Context, workerID int, attemptID int64, dsn string, cf
 	if err != nil {
 		phase := "query"
 		errMsg := err.Error()
+		errType, errCode := classifyError(err)
 		res.FailurePhase = &phase
 		res.ErrorMessage = &errMsg
+		res.ErrorType = &errType
+		res.ErrorCode = errCode
+		db.Close()
 		return
 	}
 
-	// Disconnect
+	// Disconnect (explicit close, no defer to avoid double-close)
 	startDisconnect := time.Now()
 	err = db.Close()
 	discLatency := time.Since(startDisconnect).Milliseconds()
@@ -373,15 +491,18 @@ func runTrial(ctx context.Context, workerID int, attemptID int64, dsn string, cf
 	if err != nil {
 		phase := "disconnect"
 		errMsg := err.Error()
+		errType, errCode := classifyError(err)
 		res.FailurePhase = &phase
 		res.ErrorMessage = &errMsg
+		res.ErrorType = &errType
+		res.ErrorCode = errCode
 		return
 	}
 
 	res.Success = true
 }
 
-func spikeManager(ctx context.Context, cfg Config, results chan<- TrialResult, wg *sync.WaitGroup) {
+func spikeManager(ctx context.Context, cfg Config, dsn string, results chan<- TrialResult, wg *sync.WaitGroup) {
 	defer wg.Done()
 	if cfg.SpikeConcurrency <= 0 || cfg.SpikeInterval <= 0 || cfg.SpikeDuration <= 0 {
 		return
@@ -397,17 +518,17 @@ func spikeManager(ctx context.Context, cfg Config, results chan<- TrialResult, w
 		case <-ticker.C:
 			log.Printf("🔥 SPIKE TRIGGERED: Starting %d additional concurrent workers for %s", cfg.SpikeConcurrency, cfg.SpikeDuration)
 			spikeCtx, spikeCancel := context.WithTimeout(ctx, cfg.SpikeDuration)
-			
+
 			var spikeWg sync.WaitGroup
 			for i := 0; i < cfg.SpikeConcurrency; i++ {
 				spikeWg.Add(1)
 				wg.Add(1) // Track in main wait group to prevent channel closing too early
 				go func(workerID int) {
 					defer wg.Done()
-					worker(spikeCtx, workerID, cfg, results, &spikeWg)
+					worker(spikeCtx, workerID, cfg, dsn, results, &spikeWg)
 				}(cfg.Concurrency + i)
 			}
-			
+
 			// Wait and cleanup in background to not block the next spike
 			go func() {
 				spikeWg.Wait()
@@ -429,13 +550,15 @@ func main() {
 	flag.StringVar(&cfg.SQL, "sql", "SELECT 1", "SQL query to execute")
 	flag.IntVar(&cfg.Concurrency, "concurrency", 10, "Number of concurrent workers")
 	flag.DurationVar(&cfg.Duration, "duration", 60*time.Second, "Test duration")
-	flag.DurationVar(&cfg.ConnectTimeout, "connect_timeout", 5*time.Second, "Connection timeout")
+	flag.DurationVar(&cfg.ConnectTimeout, "connect_timeout", 5*time.Second, "Connection timeout (read/write)")
 	flag.DurationVar(&cfg.QueryTimeout, "query_timeout", 10*time.Second, "Query timeout")
+	flag.DurationVar(&cfg.DialTimeout, "dial_timeout", 5*time.Second, "TCP dial timeout")
+	flag.StringVar(&cfg.TLSMode, "tls_mode", "", "TLS mode: '' (disabled), 'true', 'skip-verify', or 'custom'")
 	flag.StringVar(&cfg.RunID, "run_id", fmt.Sprintf("run-%d", time.Now().Unix()), "Identifier for this test run")
 	flag.StringVar(&cfg.AggregateLogPath, "aggregate_log_path", "aggregate.jsonl", "Path to output aggregate log")
 	flag.StringVar(&cfg.ErrorLogPath, "error_log_path", "error.jsonl", "Path to output error detailed log")
 	flag.DurationVar(&cfg.AggregateWindow, "aggregate_window", 10*time.Second, "Time window for aggregation bucket (1s, 10s, 1m)")
-	flag.DurationVar(&cfg.SleepBetweenAttempts, "sleep_between_attempts_ms", 0, "Sleep between attempts")
+	flag.DurationVar(&cfg.SleepBetweenAttempts, "sleep_between_attempts", 0, "Sleep between attempts (e.g. 10ms, 1s)")
 
 	// Spike options
 	flag.IntVar(&cfg.SpikeConcurrency, "spike_concurrency", 0, "Additional concurrency during a spike")
@@ -444,9 +567,35 @@ func main() {
 
 	flag.Parse()
 
+	// Build DSN
+	tlsParam := ""
+	if cfg.TLSMode != "" {
+		switch cfg.TLSMode {
+		case "true":
+			tlsParam = "&tls=true"
+		case "skip-verify":
+			mysql.RegisterTLSConfig("skip-verify", &tls.Config{InsecureSkipVerify: true})
+			tlsParam = "&tls=skip-verify"
+		case "custom":
+			mysql.RegisterTLSConfig("custom", &tls.Config{})
+			tlsParam = "&tls=custom"
+		default:
+			log.Fatalf("Unknown tls_mode: %s (use 'true', 'skip-verify', or 'custom')", cfg.TLSMode)
+		}
+	}
+
+	dsn := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?timeout=%s&readTimeout=%s&writeTimeout=%s%s&parseTime=true",
+		cfg.User, cfg.Password, cfg.Host, cfg.Port, cfg.Database,
+		cfg.DialTimeout.String(), cfg.QueryTimeout.String(), cfg.QueryTimeout.String(),
+		tlsParam)
+
 	log.Printf("Starting stress test v2 against %s:%d", cfg.Host, cfg.Port)
 	log.Printf("Run ID: %s, Base Concurrency: %d, Duration: %s, Window: %s", cfg.RunID, cfg.Concurrency, cfg.Duration, cfg.AggregateWindow)
-	
+
+	if cfg.TLSMode != "" {
+		log.Printf("TLS Mode: %s", cfg.TLSMode)
+	}
+
 	if cfg.SpikeConcurrency > 0 {
 		log.Printf("Spike Config: +%d workers for %s every %s", cfg.SpikeConcurrency, cfg.SpikeDuration, cfg.SpikeInterval)
 	}
@@ -463,12 +612,12 @@ func main() {
 	var workerWg sync.WaitGroup
 	for i := 0; i < cfg.Concurrency; i++ {
 		workerWg.Add(1)
-		go worker(ctx, i, cfg, results, &workerWg)
+		go worker(ctx, i, cfg, dsn, results, &workerWg)
 	}
 
 	if cfg.SpikeConcurrency > 0 && cfg.SpikeDuration > 0 && cfg.SpikeInterval > 0 {
 		workerWg.Add(1)
-		go spikeManager(ctx, cfg, results, &workerWg)
+		go spikeManager(ctx, cfg, dsn, results, &workerWg)
 	}
 
 	workerWg.Wait()
