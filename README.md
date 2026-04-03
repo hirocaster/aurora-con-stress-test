@@ -87,6 +87,8 @@ uv run plot.py aggregate.jsonl -o result.png
 
 出力された `result.png` には、「スループット(TPS)」「成功率」「レイテンシ(p99)」の3つのグラフが時系列でプロットされ、パフォーマンスの悪化ポイントが一目で確認できます。
 
+![Performance Graph](sample/stress_test_result.png)
+
 ### 3. CUIでの簡易分析
 ターミナル上でテキストとしてサマリーを見たい場合は、`analyze.py` を使用します。
 
