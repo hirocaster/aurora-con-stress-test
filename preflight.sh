@@ -90,10 +90,10 @@ check_value_reverse "tcp_fin_timeout" "$tcp_fin_timeout" 15 "WARN" \
     "sysctl -w net.ipv4.tcp_fin_timeout=15"
 
 tcp_tw_reuse=$(cat /proc/sys/net/ipv4/tcp_tw_reuse)
-if [ "$tcp_tw_reuse" -eq 1 ] || [ "$tcp_tw_reuse" -eq 2 ]; then
+if [ "$tcp_tw_reuse" -eq 1 ]; then
     echo -e "tcp_tw_reuse                  : $tcp_tw_reuse\n  -> \e[32m[OK]\e[0m\n"
 else
-    echo -e "tcp_tw_reuse                  : $tcp_tw_reuse\n  -> \e[31m[NG]\e[0m\n     Reason: TIME_WAIT 状態のソケットを再利用できないと、短命接続のポート枯渇が急速に進みます。\n     Fix:    sysctl -w net.ipv4.tcp_tw_reuse=1\n"
+    echo -e "tcp_tw_reuse                  : $tcp_tw_reuse\n  -> \e[31m[NG]\e[0m\n     Reason: TIME_WAIT 状態のソケットを再利用できないと、短命接続のポート枯渇が急速に進みます。値が '2' (Loopbackのみ) の場合も外部のAuroraには無効です。\n     Fix:    sysctl -w net.ipv4.tcp_tw_reuse=1\n"
     ((ng_count++))
 fi
 
