@@ -18,6 +18,7 @@ def main():
     query_p99 = []
     total_p99 = []
     active_concurrency = []
+    error_counts = []
 
     try:
         with open(args.log_file, 'r') as f:
@@ -38,11 +39,13 @@ def main():
                 
                 times.append(dt)
                 tps.append(stats.get('throughput_per_sec', 0))
-                overall_success_rate.append(stats.get('overall_success_rate', 0) * 100)
+                succ = stats.get('overall_success_rate')
+                overall_success_rate.append((succ if succ is not None else 0) * 100)
                 conn_p99.append(stats.get('connect_p99_ms', 0))
                 query_p99.append(stats.get('query_p99_ms', 0))
                 total_p99.append(stats.get('total_p99_ms', 0))
                 active_concurrency.append(stats.get('active_concurrency', stats.get('configured_concurrency', 0)))
+                error_counts.append(stats.get('overall_failure_count', 0))
 
     except FileNotFoundError:
         print(f"Error: Log file not found: {args.log_file}")
@@ -52,8 +55,8 @@ def main():
         print("No valid data found to plot.")
         sys.exit(1)
 
-    # Create subplots: 3 rows, 1 column
-    fig, (ax1, ax2, ax3) = plt.subplots(3, 1, figsize=(12, 10), sharex=True)
+    # Create subplots: 4 rows, 1 column
+    fig, (ax1, ax2, ax3, ax4) = plt.subplots(4, 1, figsize=(12, 12), sharex=True)
     fig.suptitle('Aurora Stress Test Performance', fontsize=16)
 
     # 1. Throughput (TPS)
@@ -85,12 +88,19 @@ def main():
     ax3.plot(times, query_p99, color='red', label='Query p99')
     ax3.plot(times, total_p99, color='purple', label='Total p99', linestyle='--')
     ax3.set_ylabel('Latency (ms)')
-    ax3.set_xlabel('Time')
     ax3.grid(True, linestyle='--', alpha=0.7)
     ax3.legend(loc='upper left')
 
+    # 4. Error Count
+    ax4.plot(times, error_counts, color='tab:red', label='Error Count', marker='.', linestyle='-')
+    ax4.set_ylabel('Error Count')
+    ax4.set_xlabel('Time')
+    ax4.grid(True, linestyle='--', alpha=0.7)
+    ax4.set_ylim(bottom=0)
+    ax4.legend(loc='upper left')
+
     # Format x-axis
-    ax3.xaxis.set_major_formatter(mdates.DateFormatter('%H:%M:%S'))
+    ax4.xaxis.set_major_formatter(mdates.DateFormatter('%H:%M:%S'))
     fig.autofmt_xdate()
 
     plt.tight_layout()
