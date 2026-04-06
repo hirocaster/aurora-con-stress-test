@@ -63,17 +63,28 @@ go build -o stress-test main.go
 ```
 
 ### パラメータ
-- `-concurrency`: 並列ワーカー数（ゴルーチン数）
-- `-duration`: 試験の実施時間（例: `10m`, `1h`）
-- `-aggregate_window`: ログを集約する時間バケット幅（例: `1s`, `10s`, `1m`）
-- `-sleep_between_attempts`: 次の試行までのスリープ時間（例: `10ms`, `1s`）
-- `-dial_timeout`: TCP接続のタイムアウト時間（例: `5s`）
-- `-tls_mode`: TLS接続モード（`''`: 無効, `'true'`: 有効, `'skip-verify'`: 証明書検証スキップ, `'custom'`: カスタムTLS）
+- `-host` (デフォルト: `127.0.0.1`): 対象の MySQL / Aurora ホスト
+- `-port` (デフォルト: `3306`): 対象のポート番号
+- `-user` (デフォルト: `root`): MySQL ユーザー
+- `-password` (デフォルト: `""`): MySQL パスワード
+- `-database` (デフォルト: `""`): 使用するデータベース名
+- `-sql` (デフォルト: `SELECT 1`): 実行するクエリ
+- `-concurrency` (デフォルト: `10`): 並列ワーカー数（ゴルーチン数）
+- `-duration` (デフォルト: `60s`): 試験の実施時間（例: `10m`, `1h`）
+- `-connect_timeout` (デフォルト: `5s`): 接続フェーズ全体のタイムアウト
+- `-query_timeout` (デフォルト: `10s`): クエリ実行フェーズのタイムアウト
+- `-dial_timeout` (デフォルト: `5s`): TCP接続のタイムアウト時間
+- `-tls_mode` (デフォルト: `""`): TLS接続モード（`''`: 無効, `'true'`: 有効, `'skip-verify'`: 証明書検証スキップ, `'custom'`: カスタムTLS）
+- `-run_id` (デフォルト: `run-<UnixTime>`): テスト実行の識別子
+- `-aggregate_log_path` (デフォルト: `aggregate.jsonl`): 集約ログの出力ファイルパス
+- `-error_log_path` (デフォルト: `error.jsonl`): エラーログの詳細出力先
+- `-aggregate_window` (デフォルト: `10s`): ログを集約する時間バケット幅（例: `1s`, `1m`）
+- `-sleep_between_attempts` (デフォルト: `0`): 次の試行までのスリープ時間（例: `10ms`, `1s`）
 
 #### コネクションストーム（スパイク）のシミュレーション
-- `-spike_concurrency`: スパイク時に追加で発生させる同時接続数
-- `-spike_duration`: スパイクの継続時間（例: `5s`）
-- `-spike_interval`: スパイクを発生させる間隔（例: `1m`）
+- `-spike_concurrency` (デフォルト: `0`): スパイク時に追加で発生させる同時接続数
+- `-spike_duration` (デフォルト: `0`): スパイクの継続時間（例: `5s`）
+- `-spike_interval` (デフォルト: `0`): スパイクを発生させる間隔（例: `1m`）
 ※ 普段は `-concurrency` の数で負荷をかけつつ、`-spike_interval` 経過毎に `-spike_duration` の間だけ `-spike_concurrency` 個のワーカーが追加で一斉に接続を行います。
 
 ## ログの確認とグラフ化 (Plot)
