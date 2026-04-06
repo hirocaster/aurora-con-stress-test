@@ -329,6 +329,19 @@ func aggregator(ctx context.Context, cfg Config, results <-chan TrialResult, wg 
 		stats.TotalAvgMs, stats.TotalP50Ms, stats.TotalP90Ms, stats.TotalP95Ms, stats.TotalP99Ms, stats.TotalMaxMs = calcPercentiles(totalLatencies)
 
 		aggEncoder.Encode(stats)
+
+		// Print CLI summary
+		succRate := 0.0
+		if stats.OverallSuccessRate != nil {
+			succRate = *stats.OverallSuccessRate * 100.0
+		}
+		var errSummary string
+		if stats.OverallFailureCount > 0 {
+			errSummary = fmt.Sprintf(" | ERRORS: %v", stats.ErrorTypeCounts)
+		}
+		timeFmt := stats.BucketEnd.Format("15:04:05")
+		log.Printf("[%s] QPS: %5.1f | Succ: %5.1f%% | Latency(ms) P50: %3d / P99: %3d / Max: %4d | Active: %d%s",
+			timeFmt, stats.ThroughputPerSec, succRate, stats.TotalP50Ms, stats.TotalP99Ms, stats.TotalMaxMs, stats.ActiveConcurrency, errSummary)
 	}
 
 	for {
