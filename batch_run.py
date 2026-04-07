@@ -14,9 +14,8 @@ def calculate_concurrency(target_qps, latency_ms, sleep_ms):
 def run_test(qps, scenario_name, concurrency, sleep_ms, args):
     results_dir = f"results/qps{qps}_{scenario_name}"
     os.makedirs(results_dir, exist_ok=True)
-    
-    print(f"\n🚀 Phase: QPS {qps} - {scenario_name.capitalize()} Case")
-    print(f"   Parameters: -concurrency {concurrency}, -sleep_between_attempts {sleep_ms}ms")
+    print(f"\n🚀 Phase: QPS {qps} - {scenario_name.capitalize()} Case", flush=True)
+    print(f"   Parameters: -concurrency {concurrency}, -sleep_between_attempts {sleep_ms}ms", flush=True)
     
     cmd = [
         "./stress-test",
@@ -35,11 +34,11 @@ def run_test(qps, scenario_name, concurrency, sleep_ms, args):
     try:
         subprocess.run(cmd, check=True)
     except subprocess.CalledProcessError as e:
-        print(f"❌ Error running stress-test: {e}")
+        print(f"❌ Error running stress-test: {e}", flush=True)
         return
 
     # Run plot.py
-    print(f"📊 Generating plot for {scenario_name}...")
+    print(f"📊 Generating plot for {scenario_name}...", flush=True)
     plot_cmd = [
         "uv", "run", "plot.py",
         os.path.join(results_dir, "aggregate.jsonl"),
@@ -47,9 +46,9 @@ def run_test(qps, scenario_name, concurrency, sleep_ms, args):
     ]
     try:
         subprocess.run(plot_cmd, check=True)
-        print(f"✅ Success: Results saved in {results_dir}")
+        print(f"✅ Success: Results saved in {results_dir}", flush=True)
     except subprocess.CalledProcessError as e:
-        print(f"⚠️ Warning: Plot generation failed for {results_dir}")
+        print(f"⚠️ Warning: Plot generation failed for {results_dir}", flush=True)
 
 def main():
     parser = argparse.ArgumentParser(description="Automated Batch Aurora Stress Test Runner")
@@ -65,7 +64,7 @@ def main():
     # Read QPS values
     qps_list = []
     if not os.path.exists(args.qps_file):
-        print(f"Error: QPS file not found: {args.qps_file}")
+        print(f"Error: QPS file not found: {args.qps_file}", flush=True)
         return
     
     with open(args.qps_file, 'r') as f:
@@ -75,28 +74,31 @@ def main():
                 try:
                     qps_list.append(int(val))
                 except ValueError:
-                    print(f"Skipping invalid QPS value: {val}")
+                    print(f"Skipping invalid QPS value: {val}", flush=True)
 
-    print(f"📋 Loaded {len(qps_list)} QPS targets from {args.qps_file}")
+    print(f"📋 Loaded {len(qps_list)} QPS targets from {args.qps_file}", flush=True)
 
-    for i, qps in enumerate(qps_list):
-        # Case 1: Healthy (15ms latency, 10ms sleep)
-        c_healthy = calculate_concurrency(qps, 15, 10)
-        run_test(qps, "healthy", c_healthy, 10, args)
+    scenarios = [
+        ("healthy", 15, 10),
+        ("congested", 30, 30)
+    ]
+    
+    total_runs = len(qps_list) * len(scenarios)
+    run_idx = 0
 
-        print(f"⏳ Cooling down for {args.cooldown} seconds...")
-        time.sleep(args.cooldown)
+    for qps in qps_list:
+        for scenario_name, lat, slp in scenarios:
+            run_idx += 1
+            
+            # 最初の実行以外は、開始前にクールダウンを挟む
+            if run_idx > 1:
+                print(f"\n⏳ Waiting {args.cooldown}s for environment to settle before next scenario...", flush=True)
+                time.sleep(args.cooldown)
+            
+            concurrency = calculate_concurrency(qps, lat, slp)
+            run_test(qps, scenario_name, concurrency, slp, args)
 
-        # Case 2: Congested (30ms latency, 30ms sleep)
-        c_congested = calculate_concurrency(qps, 30, 30)
-        run_test(qps, "congested", c_congested, 30, args)
-        
-        # 最後のQPSでなければ、次のQPSの前に再度クールダウン
-        if i < len(qps_list) - 1:
-            print(f"⏳ Cooling down for {args.cooldown} seconds before next QPS target...")
-            time.sleep(args.cooldown)
-
-    print("\n✨ All batch tests completed!")
+    print(f"\n✨ All {total_runs} tests completed!", flush=True)
 
 if __name__ == "__main__":
     main()
