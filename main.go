@@ -544,7 +544,6 @@ func spikeManager(ctx context.Context, cfg Config, dsn string, results chan<- Tr
 				}(cfg.Concurrency + i)
 			}
 
-			// Wait and cleanup in background to not block the next spike
 			go func() {
 				spikeWg.Wait()
 				spikeCancel()
@@ -552,6 +551,32 @@ func spikeManager(ctx context.Context, cfg Config, dsn string, results chan<- Tr
 			}()
 		}
 	}
+}
+
+func logDBConnectionStats(dsn string, label string) {
+	db, err := sql.Open("mysql", dsn)
+	if err != nil {
+		log.Printf("[%s] Could not connect to DB for stats: %v", label, err)
+		return
+	}
+	defer db.Close()
+	
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	var varName, maxConns string
+	err = db.QueryRowContext(ctx, "SHOW VARIABLES LIKE 'max_connections'").Scan(&varName, &maxConns)
+	if err != nil {
+		maxConns = "unknown"
+	}
+
+	var statName, maxUsed string
+	err = db.QueryRowContext(ctx, "SHOW STATUS LIKE 'Max_used_connections'").Scan(&statName, &maxUsed)
+	if err != nil {
+		maxUsed = "unknown"
+	}
+
+	log.Printf("📊 [%s] DB Stats -> max_connections: %s, Max_used_connections: %s", label, maxConns, maxUsed)
 }
 
 func main() {
@@ -621,6 +646,8 @@ func main() {
 		log.Printf("Spike Config: +%d workers for %s every %s", cfg.SpikeConcurrency, cfg.SpikeDuration, cfg.SpikeInterval)
 	}
 
+	logDBConnectionStats(dsn, "PRE-BENCHMARK")
+
 	ctx, cancel := context.WithTimeout(context.Background(), cfg.Duration)
 	defer cancel()
 
@@ -644,6 +671,8 @@ func main() {
 	workerWg.Wait()
 	close(results)
 	aggWg.Wait()
+
+	logDBConnectionStats(dsn, "POST-BENCHMARK")
 
 	log.Printf("Stress test completed. Aggregates in %s, errors in %s", cfg.AggregateLogPath, cfg.ErrorLogPath)
 }
