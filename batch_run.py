@@ -59,6 +59,7 @@ def main():
     parser.add_argument("--password", required=True, help="Database password")
     parser.add_argument("--duration", default="5m", help="Test duration (default: 5m)")
     parser.add_argument("--window", default="10s", help="Aggregate window (default: 10s)")
+    parser.add_argument("--cooldown", type=int, default=30, help="Cooldown time between tests in seconds (default: 30)")
     args = parser.parse_args()
 
     # Read QPS values
@@ -78,14 +79,22 @@ def main():
 
     print(f"📋 Loaded {len(qps_list)} QPS targets from {args.qps_file}")
 
-    for qps in qps_list:
+    for i, qps in enumerate(qps_list):
         # Case 1: Healthy (15ms latency, 10ms sleep)
         c_healthy = calculate_concurrency(qps, 15, 10)
         run_test(qps, "healthy", c_healthy, 10, args)
 
+        print(f"⏳ Cooling down for {args.cooldown} seconds...")
+        time.sleep(args.cooldown)
+
         # Case 2: Congested (30ms latency, 30ms sleep)
         c_congested = calculate_concurrency(qps, 30, 30)
         run_test(qps, "congested", c_congested, 30, args)
+        
+        # 最後のQPSでなければ、次のQPSの前に再度クールダウン
+        if i < len(qps_list) - 1:
+            print(f"⏳ Cooling down for {args.cooldown} seconds before next QPS target...")
+            time.sleep(args.cooldown)
 
     print("\n✨ All batch tests completed!")
 
