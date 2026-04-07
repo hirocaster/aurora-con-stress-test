@@ -87,6 +87,30 @@ go build -o stress-test main.go
 - `-spike_interval` (デフォルト: `0`): スパイクを発生させる間隔（例: `1m`）
 ※ 普段は `-concurrency` の数で負荷をかけつつ、`-spike_interval` 経過毎に `-spike_duration` の間だけ `-spike_concurrency` 個のワーカーが追加で一斉に接続を行います。
 
+## パラメータの選定 (目標QPSからの計算)
+ターゲットとする QPS を指定すると、推奨される `-concurrency` と `-sleep_between_attempts` の組み合わせを提案するツールが付属しています。
+
+```bash
+python3 suggest_params.py <目標QPS>
+```
+
+**実行例 (4,000 QPS を狙いたい場合):**
+```bash
+$ python3 suggest_params.py 4000
+--- Suggestion for 4000 QPS (Assumed Latency: 15ms) ---
+Option (Sleep 10ms): -concurrency 100  (Theory: 4000.0 QPS)
+Option (Sleep 20ms): -concurrency 140  (Theory: 4000.0 QPS)
+...
+
+--- Suggestion for 4000 QPS (Assumed Latency: 30ms) ---
+Option (Sleep 10ms): -concurrency 160  (Theory: 4000.0 QPS)
+Option (Sleep 20ms): -concurrency 200  (Theory: 4000.0 QPS)
+...
+```
+
+- **健康時 (Latency 15ms)**: DBに負荷がかかっていない状態での最速の指標です。
+- **混雑時 (Latency 30ms)**: 負荷がかかり、DBの応答が少し遅れ始めた状態の指標です。エラーを避けつつ目標QPSを維持したい場合は、こちらのパターンから設定を選ぶことを推奨します。
+
 ## ログの確認とグラフ化 (Plot)
 集約ログは1バケット1行の JSON Lines で出力されます。
 これを同梱の Python スクリプトで簡単に視覚化・グラフ化できます。
