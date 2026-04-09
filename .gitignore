@@ -5,3 +5,6 @@ stress-test
 *.log
 *.jsonl
 .python-version
+
+# Windows Zone.Identifier metadata files
+*.Zone.Identifier
