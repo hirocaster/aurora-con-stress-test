@@ -254,8 +254,25 @@ chmod +x run_longrun_test.sh
   --database "mydb" \
   --qps 2000 \
   --duration 48h \
-  --concurrency 50 \
   --sleep-ms 10
+```
+
+`run_longrun_test.sh` は `--concurrency` を省略した場合、`--qps` / `--sleep-ms` / `--assumed-latency-ms` から初期コンカレンシーを自動算出し、さらにデフォルトで 1 分のキャリブレーションを実施して実効TPSを補正します。
+
+- 初期算出: `ceil(qps / (1000 / (assumed_latency_ms + sleep_ms)))`
+- 既定値: `--assumed-latency-ms 15`, `--calibrate-duration 1m`, `--calibrate-tolerance-pct 10`
+- `--concurrency` 指定時は手動値を優先し、キャリブレーションは行いません。
+
+キャリブレーション無効化（手動調整したい場合）:
+
+```bash
+./run_longrun_test.sh \
+  --host "your-aurora-cluster.cluster-xyz.ap-northeast-1.rds.amazonaws.com" \
+  --user "admin" \
+  --password "secret" \
+  --qps 2000 \
+  --sleep-ms 10 \
+  --no-calibration
 ```
 
 ### SSH切断を考慮した実行例（nohup）
@@ -270,7 +287,6 @@ nohup ./run_longrun_test.sh \
   --database "mydb" \
   --qps 2000 \
   --duration 48h \
-  --concurrency 50 \
   --sleep-ms 10 \
   > longrun.out 2>&1 &
 ```

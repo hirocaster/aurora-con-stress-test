@@ -10,7 +10,11 @@ QPS="2000"
 DURATION="48h"
 WINDOW="10s"
 SLEEP_MS="10"
-CONCURRENCY="50"
+CONCURRENCY=""
+MANUAL_CONCURRENCY="false"
+ASSUMED_LATENCY_MS="15"
+CALIBRATE_DURATION="1m"
+CALIBRATE_TOLERANCE_PCT="10"
 OUTPUT_ROOT="results/db_r8g_xlarge"
 RUN_PREFLIGHT="true"
 
@@ -28,6 +32,10 @@ Usage:
     [--window 10s] \
     [--sleep-ms 10] \
     [--concurrency 50] \
+    [--assumed-latency-ms 15] \
+    [--calibrate-duration 1m] \
+    [--calibrate-tolerance-pct 10] \
+    [--no-calibration] \
     [--output-root results/db_r8g_xlarge] \
     [--skip-preflight]
 EOF
@@ -44,7 +52,11 @@ while [[ $# -gt 0 ]]; do
     --duration) DURATION="$2"; shift 2 ;;
     --window) WINDOW="$2"; shift 2 ;;
     --sleep-ms) SLEEP_MS="$2"; shift 2 ;;
-    --concurrency) CONCURRENCY="$2"; shift 2 ;;
+    --concurrency) CONCURRENCY="$2"; MANUAL_CONCURRENCY="true"; shift 2 ;;
+    --assumed-latency-ms) ASSUMED_LATENCY_MS="$2"; shift 2 ;;
+    --calibrate-duration) CALIBRATE_DURATION="$2"; shift 2 ;;
+    --calibrate-tolerance-pct) CALIBRATE_TOLERANCE_PCT="$2"; shift 2 ;;
+    --no-calibration) CALIBRATE_DURATION="0s"; shift ;;
     --output-root) OUTPUT_ROOT="$2"; shift 2 ;;
     --skip-preflight) RUN_PREFLIGHT="false"; shift ;;
     -h|--help) usage; exit 0 ;;
@@ -60,6 +72,18 @@ if [[ -z "$HOST" || -z "$USER" || -z "$PASSWORD" ]]; then
   echo "--host, --user, --password are required"
   usage
   exit 1
+fi
+
+if [[ "$MANUAL_CONCURRENCY" == "false" ]]; then
+  CONCURRENCY=$(python3 - <<PY
+import math
+qps = float("$QPS")
+sleep_ms = float("$SLEEP_MS")
+lat_ms = float("$ASSUMED_LATENCY_MS")
+req_per_worker = 1000.0 / (lat_ms + sleep_ms)
+print(max(1, math.ceil(qps / req_per_worker)))
+PY
+)
 fi
 
 if [[ "$RUN_PREFLIGHT" == "true" ]]; then
@@ -85,7 +109,90 @@ if [[ -n "$DATABASE" ]]; then
   DB_ARGS+=("-database" "$DATABASE")
 fi
 
-echo "[3/5] Starting stress-test"
+echo "Target QPS: $QPS"
+echo "Sleep(ms): $SLEEP_MS"
+echo "Assumed latency(ms): $ASSUMED_LATENCY_MS"
+echo "Concurrency: $CONCURRENCY (manual=${MANUAL_CONCURRENCY})"
+
+if [[ "$MANUAL_CONCURRENCY" == "false" && "$CALIBRATE_DURATION" != "0" && "$CALIBRATE_DURATION" != "0s" ]]; then
+  CALIB_AGG="${OUTDIR}/calibration.aggregate.jsonl"
+  CALIB_ERR="${OUTDIR}/calibration.error.jsonl"
+  CALIB_LOG="${OUTDIR}/calibration.log"
+
+  echo "[3/6] Running calibration (${CALIBRATE_DURATION})"
+  ./stress-test \
+    -host "$HOST" \
+    -port "$PORT" \
+    -user "$USER" \
+    -password "$PASSWORD" \
+    "${DB_ARGS[@]}" \
+    -concurrency "$CONCURRENCY" \
+    -duration "$CALIBRATE_DURATION" \
+    -aggregate_window "$WINDOW" \
+    -sleep_between_attempts "${SLEEP_MS}ms" \
+    -aggregate_log_path "$CALIB_AGG" \
+    -error_log_path "$CALIB_ERR" \
+    -run_id "${RUN_ID}-calibration" >"$CALIB_LOG" 2>&1
+
+  CALIB_TPS=$(python3 - "$CALIB_AGG" <<'PY'
+import json
+import sys
+
+path = sys.argv[1]
+vals = []
+with open(path, "r", encoding="utf-8") as f:
+    for line in f:
+        line = line.strip()
+        if not line:
+            continue
+        obj = json.loads(line)
+        vals.append(float(obj.get("throughput_per_sec") or 0.0))
+
+if not vals:
+    print("0")
+else:
+    print(sum(vals) / len(vals))
+PY
+)
+
+  if python3 - <<PY
+val = float("$CALIB_TPS")
+raise SystemExit(0 if val > 0 else 1)
+PY
+  then
+    CALIB_DIFF_PCT=$(python3 - <<PY
+target = float("$QPS")
+observed = float("$CALIB_TPS")
+print(abs(observed - target) / target * 100.0)
+PY
+)
+
+    echo "Calibration avg TPS: $CALIB_TPS (diff=${CALIB_DIFF_PCT}%)"
+    if python3 - <<PY
+diff = float("$CALIB_DIFF_PCT")
+tol = float("$CALIBRATE_TOLERANCE_PCT")
+raise SystemExit(0 if diff > tol else 1)
+PY
+    then
+      NEW_CONCURRENCY=$(python3 - <<PY
+import math
+current = float("$CONCURRENCY")
+target = float("$QPS")
+observed = float("$CALIB_TPS")
+print(max(1, math.ceil(current * target / observed)))
+PY
+)
+      echo "Adjusting concurrency: $CONCURRENCY -> $NEW_CONCURRENCY"
+      CONCURRENCY="$NEW_CONCURRENCY"
+    else
+      echo "Calibration within tolerance (${CALIBRATE_TOLERANCE_PCT}%), keep concurrency=$CONCURRENCY"
+    fi
+  else
+    echo "WARN: calibration produced no throughput data; keep concurrency=$CONCURRENCY"
+  fi
+fi
+
+echo "[4/6] Starting stress-test"
 set +e
 ./stress-test \
   -host "$HOST" \
@@ -103,7 +210,7 @@ set +e
 STRESS_PID=$!
 set -e
 
-echo "[4/5] Starting resource monitor (pid=${STRESS_PID})"
+echo "[5/6] Starting resource monitor (pid=${STRESS_PID})"
 python3 monitor_resources.py \
   --pid "$STRESS_PID" \
   --output "$RES_LOG" \
@@ -118,7 +225,7 @@ wait "$MONITOR_PID"
 MONITOR_EXIT=$?
 set -e
 
-echo "[5/5] Running long-run analysis"
+echo "[6/6] Running long-run analysis"
 python3 analyze_longrun.py "$AGG_LOG" \
   --resources-log "$RES_LOG" \
   --min-success-rate 0.995 \
