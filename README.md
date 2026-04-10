@@ -260,7 +260,7 @@ chmod +x run_longrun_test.sh
 `run_longrun_test.sh` は `--concurrency` を省略した場合、`--qps` / `--sleep-ms` / `--assumed-latency-ms` から初期コンカレンシーを自動算出し、さらにデフォルトで 1 分のキャリブレーションを実施して実効TPSを補正します。
 
 - 初期算出: `ceil(qps / (1000 / (assumed_latency_ms + sleep_ms)))`
-- 既定値: `--assumed-latency-ms 15`, `--calibrate-duration 1m`, `--calibrate-tolerance-pct 10`
+- 既定値: `--assumed-latency-ms 15`, `--calibrate-duration 0s`（デフォルト無効）, `--calibrate-tolerance-pct 10`
 - `--concurrency` 指定時は手動値を優先し、キャリブレーションは行いません。
 
 キャリブレーション無効化（手動調整したい場合）:
