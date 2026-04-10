@@ -233,3 +233,43 @@ nohup ./stress-test \
   -spike_concurrency 500 \
   > stress-test.log 2>&1 &
 ```
+
+## db.r8g.xlarge 向け 48時間ロングラン実行
+
+週末の 48 時間連続テスト（2000QPS）を簡単に実行するための補助スクリプトを追加しています。
+
+- `run_longrun_test.sh`: 実行オーケストレーション（preflight -> 実行 -> 監視 -> 分析）
+- `monitor_resources.py`: `/proc` ベースのリソース監視（30秒間隔）
+- `analyze_longrun.py`: 成功率・劣化率（初期1時間 vs 最終1時間）の合否判定
+
+### 実行例
+
+```bash
+chmod +x run_longrun_test.sh
+
+./run_longrun_test.sh \
+  --host "your-aurora-cluster.cluster-xyz.ap-northeast-1.rds.amazonaws.com" \
+  --user "admin" \
+  --password "secret" \
+  --database "mydb" \
+  --qps 2000 \
+  --duration 48h \
+  --concurrency 50 \
+  --sleep-ms 10
+```
+
+### 出力先
+
+実行ごとに以下のディレクトリが作成されます。
+
+- `results/db_r8g_xlarge/longrun_qps2000_48h_<timestamp>/aggregate.jsonl`
+- `results/db_r8g_xlarge/longrun_qps2000_48h_<timestamp>/error.jsonl`
+- `results/db_r8g_xlarge/longrun_qps2000_48h_<timestamp>/resources.jsonl`
+- `results/db_r8g_xlarge/longrun_qps2000_48h_<timestamp>/summary.txt`
+- `results/db_r8g_xlarge/longrun_qps2000_48h_<timestamp>/summary.json`
+
+### 既定の判定しきい値
+
+- 全体成功率: `>= 99.5%`
+- スループット劣化: `<= 10%`（初期1時間比）
+- p99悪化率: `<= 10%`（初期1時間比）
