@@ -13,7 +13,7 @@
 | **実運用推奨上限** | **QPS 4,000**（Healthy / Congested 両シナリオで完全安定） |
 | **実運用許容上限** | **QPS 5,000**（Congested で散発的タイムアウト 2 窓、要監視） |
 | **実運用不可** | **QPS 6,000 以上**（エラー窓が増加し継続運用に不適） |
-| **arm64比較** | db.r8g.4xlarge より高QPS帯（特に QPS 5,000）で安定性が高い |
+| **arm64比較** | 1年Reserved基準では r6i が安価かつ高QPS帯で安定性優位 |
 
 ---
 
@@ -343,6 +343,48 @@
 - 同一 4xlarge クラスでも、今回の短命接続ワークロードでは **amd64 (r6i)** が高QPS帯でより安定した。
 - 差が最も大きいのは QPS 5,000 帯で、r8g は崩壊、r6i は高成功率を維持。
 - 一方で QPS 6,000 以上は r6i でも継続的なエラーが増え、実運用不可判定となる。
+- 1年Reserved単価では r6i が安価で、安定運用QPS帯を含めるとコスト効率は r6i 優位となる。
+
+---
+
+## コスト効率の比較（Aurora料金ベース）
+
+| 項目 | db.r8g.4xlarge (arm64) | db.r6i.4xlarge (amd64) |
+|------|-------------------------|--------------------------|
+| Aurora Standard 1年Reserved (USD/h) | 1.281 | 1.155 |
+| Aurora I/O最適化 1年Reserved換算 (USD/h) | 1.665 | 1.502 |
+| 月額目安 Standard (USD) | 935.1 | 843.2 |
+| 月額目安 I/O最適化換算 (USD) | 1,215.7 | 1,096.1 |
+| 推奨上限QPS | 3,000 | 4,000 |
+| 許容上限QPS | 4,000 | 5,000 |
+
+| 指標 | db.r8g.4xlarge | db.r6i.4xlarge |
+|------|-----------------|-----------------|
+| 推奨上限QPSあたり単価 (Standard RI, USD/h/QPS) | 0.000427 | 0.000289 |
+| 許容上限QPSあたり単価 (Standard RI, USD/h/QPS) | 0.000320 | 0.000231 |
+
+※上表は 1年Reserved 単価を比較軸として使用。月額は 730 時間換算。
+※ I/O最適化の Reserved換算は、Aurora公式の「Standard RIを 1.3 倍相当で評価」方針に基づく近似値。
+
+### 常時稼働前提での注意
+
+- 24/7運用では Reserved / Savings Plans 前提で評価する。本レポートは 1年Reserved を採用。
+- 3年Reserved は取得ソースで値が出ないため、最終調達時は対象リージョン・支払いオプションで再確認する。
+- 最終判断は「実効単価 × 安定運用できるQPS帯」で行う。
+
+### コスト効率の判断
+
+- **低負荷帯（QPS 1,000〜3,000）**: どちらも運用可能だが、1年Reserved単価では r6i が安価。
+- **分岐帯（QPS 3,000〜4,000）**: r8g は許容域、r6i は推奨域であり、コスト・安定性の両面で r6i が有利。
+- **高負荷帯（QPS 4,000〜5,000）**: r8g は実運用不可に入る一方で r6i は許容運用可能のため、実効コスト効率は r6i が明確に優位。
+
+### シンプルSQL時のamd64優位の解釈
+
+本テストは JOIN や複雑クエリを含まない「connect → SELECT 1 → disconnect」パターンである。
+観測上、両インスタンスとも `Max_used_connections` は `max_connections` の数%に留まり、接続数枯渇は見られなかった。
+このため、今回の差分は「TCP接続上限値そのもの」より、接続確立/切断処理時の遅延耐性差として表出した可能性が高い。
+したがって本結果は「amd64の方が常に多くの接続数を扱える」ことを示すものではない。
+接続数上限そのものの優劣を評価するには、`max_connections` 逼迫条件での別試験（接続維持時間・同時接続数を段階的に増やす検証）が必要である。
 
 ---
 
@@ -378,12 +420,14 @@ TimeoutErrorsPer10s:
 
 ### インスタンス選定の示唆
 
-| 想定QPS | 推奨インスタンスクラス | 備考 |
-|---------|---------------------|------|
-| 〜3,000 | db.r8g.4xlarge / db.r6i.4xlarge | どちらも安定域 |
-| 3,001〜4,000 | db.r6i.4xlarge 優先 | r8gより安定余裕が大きい |
-| 4,001〜5,000 | db.r6i.4xlarge（要監視） | timeout監視とリトライ実装が必須 |
-| 5,001〜 | 上位クラスまたは分散構成を検討 | 4xlarge帯の実運用上限超過 |
+| 想定QPS | 推奨インスタンスクラス | コスト効率観点 | 備考 |
+|---------|---------------------|----------------|------|
+| 〜3,000 | db.r6i.4xlarge 優先 | 1年Reserved単価で r6i が安価 | 両者とも安定域 |
+| 3,001〜4,000 | db.r6i.4xlarge 優先 | コスト・安定性の両面で優位 | 将来の負荷増を見込む場合に有利 |
+| 4,001〜5,000 | db.r6i.4xlarge（要監視） | 実効コスパは r6i が優位 | timeout監視とリトライ実装が必須 |
+| 5,001〜 | 上位クラスまたは分散構成を検討 | どちらも4xlargeの限界超過 | スケールアップ/分散が必要 |
+
+将来負荷の予測に不確実性がある場合は r6i を優先し、r8g を採用する場合は ARM互換性とリージョン別Reserved実効単価を事前検証する。
 
 ---
 
@@ -418,6 +462,12 @@ TimeoutErrorsPer10s:
 - [../db_r8g_4xlarge/REPORT.md](../db_r8g_4xlarge/REPORT.md)
 - [../db_r8g_xlarge/REPORT.md](../db_r8g_xlarge/REPORT.md)
 - https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/
+- https://instances.vantage.sh/aws/rds/db.r6i.4xlarge
+- https://instances.vantage.sh/aws/rds/db.r8g.4xlarge
+- https://dev.classmethod.jp/articles/amazon-aurora-graviton4-r8g/
+- https://developer.hatenastaff.com/entry/2026/02/27/180000
+- https://aws.amazon.com/blogs/database/improve-aurora-postgresql-throughput-by-up-to-165-and-price-performance-ratio-by-up-to-120-using-optimized-reads-on-aws-graviton4-based-r8gd-instances/
+- https://koudenpa.hatenablog.com/entry/2026/04/04/202642
 
 ---
 
