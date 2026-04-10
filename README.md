@@ -258,6 +258,32 @@ chmod +x run_longrun_test.sh
   --sleep-ms 10
 ```
 
+### SSH切断を考慮した実行例（nohup）
+
+48時間実行では、SSH切断やターミナル終了に備えて `nohup` もしくは `tmux/screen` の利用を推奨します。
+
+```bash
+nohup ./run_longrun_test.sh \
+  --host "your-aurora-cluster.cluster-xyz.ap-northeast-1.rds.amazonaws.com" \
+  --user "admin" \
+  --password "secret" \
+  --database "mydb" \
+  --qps 2000 \
+  --duration 48h \
+  --concurrency 50 \
+  --sleep-ms 10 \
+  > longrun.out 2>&1 &
+```
+
+起動確認とログ確認:
+
+```bash
+ps -ef | grep run_longrun_test.sh | grep -v grep
+tail -f longrun.out
+```
+
+実行完了後は、`longrun.out` に表示された `Run directory` 配下の `summary.txt` / `summary.json` を確認してください。
+
 ### 出力先
 
 実行ごとに以下のディレクトリが作成されます。
