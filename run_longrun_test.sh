@@ -86,6 +86,8 @@ PY
 )
 fi
 
+ulimit -n 65535 2>/dev/null || true
+
 if [[ "$RUN_PREFLIGHT" == "true" ]]; then
   echo "[1/5] Running preflight checks"
   ./preflight.sh
