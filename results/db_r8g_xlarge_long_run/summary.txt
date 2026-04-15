@@ -1,0 +1,15 @@
+====================================================================
+LONG-RUN STABILITY SUMMARY
+====================================================================
+Verdict                 : PASS
+Test range              : 2026-04-10T09:05:20+00:00 -> 2026-04-12T09:05:20+00:00
+Bucket count            : 17281
+Overall success rate    : 99.9977%
+Throughput change       : 0.01% (first 1h -> last 1h)
+Total p99 change        : 0.22% (first 1h -> last 1h)
+RSS growth              : 18.44 MB
+TCP TIME_WAIT peak      : 32257
+Checks:
+  success >= 99.50%           : PASS
+  throughput drop <= 10.00%  : PASS
+  p99 increase <= 10.00%        : PASS

@@ -1,0 +1,30 @@
+{
+  "verdict": "PASS",
+  "start": "2026-04-10T09:05:20+00:00",
+  "end": "2026-04-12T09:05:20+00:00",
+  "records": 17281,
+  "overall_success_rate": 0.9999767312824511,
+  "overall_success_rate_pct": 99.99767312824511,
+  "first_window_throughput": 1956.657777777778,
+  "last_window_throughput": 1956.8130193905818,
+  "throughput_change_pct": 0.007934019661840501,
+  "first_window_total_p99_ms": 20.26388888888889,
+  "last_window_total_p99_ms": 20.30747922437673,
+  "p99_change_pct": 0.2151133759509679,
+  "resource": {
+    "rss_start_mb": 8.85546875,
+    "rss_end_mb": 27.296875,
+    "rss_growth_mb": 18.44140625,
+    "tcp_tw_max": 32257
+  },
+  "thresholds": {
+    "min_success_rate": 0.995,
+    "max_throughput_drop_pct": 10.0,
+    "max_p99_increase_pct": 10.0
+  },
+  "checks": {
+    "success_pass": true,
+    "throughput_pass": true,
+    "p99_pass": true
+  }
+}
