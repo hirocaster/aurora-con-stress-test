@@ -1,9 +1,6 @@
 # Build binaries
 stress-test
 
-# Logs
-*.log
-*.jsonl
 .python-version
 
 # Windows Zone.Identifier metadata files
