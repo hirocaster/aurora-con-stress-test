@@ -1,0 +1,905 @@
+nohup: ignoring input
+📋 Loaded 10 QPS targets from targets.txt
+
+🚀 Phase: QPS 1000 - Healthy Case
+   Parameters: -concurrency 25, -sleep_between_attempts 10ms
+2026/04/08 13:05:00 Starting stress test v2 against database-connectivity-instance1-cluster.cluster-c9eaw8m4yzeq.ap-northeast-1.rds.amazonaws.com:3306
+2026/04/08 13:05:00 Run ID: run-1775653500, Base Concurrency: 25, Duration: 5m0s, Window: 10s
+2026/04/08 13:05:00 📊 [PRE-BENCHMARK] DB Stats -> max_connections: 16000, Max_used_connections: 8
+2026/04/08 13:05:10 [13:05:10] QPS: 969.4 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   42 | Active: 25
+2026/04/08 13:05:20 [13:05:20] QPS: 985.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   24 | Active: 25
+2026/04/08 13:05:30 [13:05:30] QPS: 992.4 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   31 | Active: 25
+2026/04/08 13:05:40 [13:05:40] QPS: 984.8 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   25 | Active: 25
+2026/04/08 13:05:50 [13:05:50] QPS: 982.6 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  18 / Max:   21 | Active: 25
+2026/04/08 13:06:00 [13:06:00] QPS: 982.3 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  21 / Max:   39 | Active: 25
+2026/04/08 13:06:10 [13:06:10] QPS: 987.5 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   29 | Active: 25
+2026/04/08 13:06:20 [13:06:20] QPS: 982.5 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  21 / Max:   29 | Active: 25
+2026/04/08 13:06:30 [13:06:30] QPS: 996.9 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   31 | Active: 25
+2026/04/08 13:06:40 [13:06:40] QPS: 985.8 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   26 | Active: 25
+2026/04/08 13:06:50 [13:06:50] QPS: 997.5 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   28 | Active: 25
+2026/04/08 13:07:00 [13:07:00] QPS: 984.8 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   22 | Active: 25
+2026/04/08 13:07:10 [13:07:10] QPS: 987.1 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   27 | Active: 25
+2026/04/08 13:07:20 [13:07:20] QPS: 999.8 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   36 | Active: 25
+2026/04/08 13:07:30 [13:07:30] QPS: 991.7 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   25 | Active: 25
+2026/04/08 13:07:40 [13:07:40] QPS: 990.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   24 | Active: 25
+2026/04/08 13:07:50 [13:07:50] QPS: 980.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  18 / Max:   28 | Active: 25
+2026/04/08 13:08:00 [13:08:00] QPS: 976.7 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  21 / Max:   28 | Active: 25
+2026/04/08 13:08:10 [13:08:10] QPS: 975.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   22 | Active: 25
+2026/04/08 13:08:20 [13:08:20] QPS: 986.5 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   23 | Active: 25
+2026/04/08 13:08:30 [13:08:30] QPS: 986.7 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   24 | Active: 25
+2026/04/08 13:08:40 [13:08:40] QPS: 980.4 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   23 | Active: 25
+2026/04/08 13:08:50 [13:08:50] QPS: 989.9 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   24 | Active: 25
+2026/04/08 13:09:00 [13:09:00] QPS: 977.6 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   24 | Active: 25
+2026/04/08 13:09:10 [13:09:10] QPS: 977.5 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   22 | Active: 25
+2026/04/08 13:09:20 [13:09:20] QPS: 996.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   23 | Active: 25
+2026/04/08 13:09:30 [13:09:30] QPS: 982.5 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   26 | Active: 25
+2026/04/08 13:09:40 [13:09:40] QPS: 989.9 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   21 | Active: 25
+2026/04/08 13:09:50 [13:09:50] QPS: 975.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   24 | Active: 25
+2026/04/08 13:10:00 [13:10:00] QPS: 974.3 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  22 / Max:   32 | Active: 25
+2026/04/08 13:10:00 [13:10:10] QPS:  25.1 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  15 / Max:   15 | Active: 0
+2026/04/08 13:10:00 📊 [POST-BENCHMARK] DB Stats -> max_connections: 16000, Max_used_connections: 33
+2026/04/08 13:10:00 Stress test completed. Aggregates in results/qps1000_healthy/aggregate.jsonl, errors in results/qps1000_healthy/error.jsonl
+📊 Generating plot for healthy...
+Plot successfully saved to results/qps1000_healthy/plot.png
+✅ Success: Results saved in results/qps1000_healthy
+
+⏳ Waiting 30s for environment to settle before next scenario...
+
+🚀 Phase: QPS 1000 - Congested Case
+   Parameters: -concurrency 60, -sleep_between_attempts 30ms
+2026/04/08 13:10:31 Starting stress test v2 against database-connectivity-instance1-cluster.cluster-c9eaw8m4yzeq.ap-northeast-1.rds.amazonaws.com:3306
+2026/04/08 13:10:31 Run ID: run-1775653831, Base Concurrency: 60, Duration: 5m0s, Window: 10s
+2026/04/08 13:10:31 📊 [PRE-BENCHMARK] DB Stats -> max_connections: 16000, Max_used_connections: 33
+2026/04/08 13:10:41 [13:10:40] QPS: 1170.0 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  20 / Max:   31 | Active: 60
+2026/04/08 13:10:51 [13:10:50] QPS: 1302.0 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  20 / Max:   24 | Active: 60
+2026/04/08 13:11:01 [13:11:00] QPS: 1302.0 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  19 / Max:   34 | Active: 60
+2026/04/08 13:11:11 [13:11:10] QPS: 1302.0 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  19 / Max:   23 | Active: 60
+2026/04/08 13:11:21 [13:11:20] QPS: 1302.0 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  19 / Max:   25 | Active: 60
+2026/04/08 13:11:31 [13:11:30] QPS: 1302.0 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  19 / Max:   23 | Active: 60
+2026/04/08 13:11:41 [13:11:40] QPS: 1302.0 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  18 / Max:   22 | Active: 60
+2026/04/08 13:11:51 [13:11:50] QPS: 1296.0 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  20 / Max:   22 | Active: 60
+2026/04/08 13:12:01 [13:12:00] QPS: 1302.0 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  21 / Max:   24 | Active: 60
+2026/04/08 13:12:11 [13:12:10] QPS: 1302.0 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  19 / Max:   21 | Active: 60
+2026/04/08 13:12:21 [13:12:20] QPS: 1302.0 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  20 / Max:   26 | Active: 60
+2026/04/08 13:12:31 [13:12:30] QPS: 1302.0 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  21 / Max:   27 | Active: 60
+2026/04/08 13:12:41 [13:12:40] QPS: 1302.0 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  19 / Max:   35 | Active: 60
+2026/04/08 13:12:51 [13:12:50] QPS: 1302.0 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  19 / Max:   29 | Active: 60
+2026/04/08 13:13:01 [13:13:00] QPS: 1302.0 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  20 / Max:   24 | Active: 60
+2026/04/08 13:13:11 [13:13:10] QPS: 1302.0 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  18 / Max:   22 | Active: 60
+2026/04/08 13:13:21 [13:13:20] QPS: 1302.0 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  21 / Max:   26 | Active: 60
+2026/04/08 13:13:31 [13:13:30] QPS: 1308.0 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  20 / Max:   27 | Active: 60
+2026/04/08 13:13:41 [13:13:40] QPS: 1298.7 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  19 / Max:   24 | Active: 60
+2026/04/08 13:13:51 [13:13:50] QPS: 1299.3 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  19 / Max:   22 | Active: 60
+2026/04/08 13:14:01 [13:14:00] QPS: 1302.0 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  19 / Max:   23 | Active: 60
+2026/04/08 13:14:11 [13:14:10] QPS: 1302.0 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  20 / Max:   22 | Active: 60
+2026/04/08 13:14:21 [13:14:20] QPS: 1305.9 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  21 / Max:   25 | Active: 60
+2026/04/08 13:14:31 [13:14:30] QPS: 1304.1 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  18 / Max:   20 | Active: 60
+2026/04/08 13:14:41 [13:14:40] QPS: 1302.0 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  20 / Max:   25 | Active: 60
+2026/04/08 13:14:51 [13:14:50] QPS: 1302.0 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  18 / Max:   23 | Active: 60
+2026/04/08 13:15:01 [13:15:00] QPS: 1296.0 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  20 / Max:   23 | Active: 60
+2026/04/08 13:15:11 [13:15:10] QPS: 1308.0 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  18 / Max:   22 | Active: 60
+2026/04/08 13:15:21 [13:15:20] QPS: 1296.0 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  23 / Max:   36 | Active: 60
+2026/04/08 13:15:31 [13:15:30] QPS: 1302.0 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  22 / Max:   27 | Active: 60
+2026/04/08 13:15:31 [13:15:40] QPS: 138.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  22 / Max:   22 | Active: 0
+2026/04/08 13:15:31 📊 [POST-BENCHMARK] DB Stats -> max_connections: 16000, Max_used_connections: 68
+2026/04/08 13:15:31 Stress test completed. Aggregates in results/qps1000_congested/aggregate.jsonl, errors in results/qps1000_congested/error.jsonl
+📊 Generating plot for congested...
+Plot successfully saved to results/qps1000_congested/plot.png
+✅ Success: Results saved in results/qps1000_congested
+
+⏳ Waiting 30s for environment to settle before next scenario...
+
+🚀 Phase: QPS 2000 - Healthy Case
+   Parameters: -concurrency 50, -sleep_between_attempts 10ms
+2026/04/08 13:16:01 Starting stress test v2 against database-connectivity-instance1-cluster.cluster-c9eaw8m4yzeq.ap-northeast-1.rds.amazonaws.com:3306
+2026/04/08 13:16:01 Run ID: run-1775654161, Base Concurrency: 50, Duration: 5m0s, Window: 10s
+2026/04/08 13:16:01 📊 [PRE-BENCHMARK] DB Stats -> max_connections: 16000, Max_used_connections: 68
+2026/04/08 13:16:11 [13:16:10] QPS: 1600.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   23 | Active: 50
+2026/04/08 13:16:21 [13:16:20] QPS: 1949.8 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   25 | Active: 50
+2026/04/08 13:16:31 [13:16:30] QPS: 1960.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   29 | Active: 50
+2026/04/08 13:16:41 [13:16:40] QPS: 1985.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   22 | Active: 50
+2026/04/08 13:16:51 [13:16:50] QPS: 1970.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   24 | Active: 50
+2026/04/08 13:17:01 [13:17:00] QPS: 1979.7 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   25 | Active: 50
+2026/04/08 13:17:11 [13:17:10] QPS: 1960.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   28 | Active: 50
+2026/04/08 13:17:21 [13:17:20] QPS: 1955.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  21 / Max:   24 | Active: 50
+2026/04/08 13:17:31 [13:17:30] QPS: 1965.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   30 | Active: 50
+2026/04/08 13:17:41 [13:17:40] QPS: 1970.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   25 | Active: 50
+2026/04/08 13:17:51 [13:17:50] QPS: 1965.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   23 | Active: 50
+2026/04/08 13:18:01 [13:18:00] QPS: 1940.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  22 / Max:   28 | Active: 50
+2026/04/08 13:18:11 [13:18:10] QPS: 1965.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   25 | Active: 50
+2026/04/08 13:18:21 [13:18:20] QPS: 1950.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   26 | Active: 50
+2026/04/08 13:18:31 [13:18:30] QPS: 1970.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   23 | Active: 50
+2026/04/08 13:18:41 [13:18:40] QPS: 1970.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  18 / Max:   22 | Active: 50
+2026/04/08 13:18:51 [13:18:50] QPS: 1970.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   25 | Active: 50
+2026/04/08 13:19:01 [13:19:00] QPS: 2002.6 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   22 | Active: 50
+2026/04/08 13:19:11 [13:19:10] QPS: 2004.8 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  18 / Max:   22 | Active: 50
+2026/04/08 13:19:21 [13:19:20] QPS: 1960.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   23 | Active: 50
+2026/04/08 13:19:31 [13:19:30] QPS: 1960.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   24 | Active: 50
+2026/04/08 13:19:41 [13:19:40] QPS: 2034.9 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  18 / Max:   27 | Active: 50
+2026/04/08 13:19:51 [13:19:50] QPS: 1970.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   29 | Active: 50
+2026/04/08 13:20:01 [13:20:00] QPS: 1945.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   22 | Active: 50
+2026/04/08 13:20:11 [13:20:10] QPS: 1965.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   27 | Active: 50
+2026/04/08 13:20:21 [13:20:20] QPS: 1984.7 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   25 | Active: 50
+2026/04/08 13:20:31 [13:20:20] QPS:   5.0 | Succ:  60.0% | Latency(ms) P50: 5008 / P99: 5014 / Max: 5014 | Active: 50 | ERRORS: map[timeout:20]
+2026/04/08 13:20:31 [13:20:30] QPS: 1041.5 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  17 / Max:   20 | Active: 50
+2026/04/08 13:20:41 [13:20:40] QPS: 1975.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   27 | Active: 50
+2026/04/08 13:20:51 [13:20:50] QPS: 1960.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   25 | Active: 50
+2026/04/08 13:21:01 [13:21:00] QPS: 1980.9 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   26 | Active: 50
+2026/04/08 13:21:01 [13:21:10] QPS: 360.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   21 | Active: 0
+2026/04/08 13:21:01 📊 [POST-BENCHMARK] DB Stats -> max_connections: 16000, Max_used_connections: 68
+2026/04/08 13:21:01 Stress test completed. Aggregates in results/qps2000_healthy/aggregate.jsonl, errors in results/qps2000_healthy/error.jsonl
+📊 Generating plot for healthy...
+Plot successfully saved to results/qps2000_healthy/plot.png
+✅ Success: Results saved in results/qps2000_healthy
+
+⏳ Waiting 30s for environment to settle before next scenario...
+
+🚀 Phase: QPS 2000 - Congested Case
+   Parameters: -concurrency 120, -sleep_between_attempts 30ms
+2026/04/08 13:21:32 Starting stress test v2 against database-connectivity-instance1-cluster.cluster-c9eaw8m4yzeq.ap-northeast-1.rds.amazonaws.com:3306
+2026/04/08 13:21:32 Run ID: run-1775654492, Base Concurrency: 120, Duration: 5m0s, Window: 10s
+2026/04/08 13:21:32 📊 [PRE-BENCHMARK] DB Stats -> max_connections: 16000, Max_used_connections: 68
+2026/04/08 13:21:42 [13:21:40] QPS: 1896.0 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  21 / Max:  150 | Active: 120
+2026/04/08 13:21:52 [13:21:50] QPS: 2628.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   22 | Active: 120
+2026/04/08 13:22:02 [13:22:00] QPS: 2616.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   24 | Active: 120
+2026/04/08 13:22:12 [13:22:10] QPS: 2616.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   26 | Active: 120
+2026/04/08 13:22:22 [13:22:20] QPS: 2604.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   23 | Active: 120
+2026/04/08 13:22:32 [13:22:30] QPS: 2616.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   29 | Active: 120
+2026/04/08 13:22:42 [13:22:40] QPS: 2628.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  23 / Max:   34 | Active: 120
+2026/04/08 13:22:52 [13:22:50] QPS: 2616.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   23 | Active: 120
+2026/04/08 13:23:02 [13:23:00] QPS: 2628.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   22 | Active: 120
+2026/04/08 13:23:12 [13:23:10] QPS: 2604.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  24 / Max:   36 | Active: 120
+2026/04/08 13:23:22 [13:23:20] QPS: 2616.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   23 | Active: 120
+2026/04/08 13:23:32 [13:23:30] QPS: 2628.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  18 / Max:   21 | Active: 120
+2026/04/08 13:23:42 [13:23:40] QPS: 2628.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   29 | Active: 120
+2026/04/08 13:23:52 [13:23:50] QPS: 2616.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   23 | Active: 120
+2026/04/08 13:24:02 [13:24:00] QPS: 2616.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   21 | Active: 120
+2026/04/08 13:24:12 [13:24:10] QPS: 2616.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   23 | Active: 120
+2026/04/08 13:24:22 [13:24:20] QPS: 2628.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   29 | Active: 120
+2026/04/08 13:24:32 [13:24:30] QPS: 2616.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   26 | Active: 120
+2026/04/08 13:24:42 [13:24:40] QPS: 2604.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   31 | Active: 120
+2026/04/08 13:24:52 [13:24:50] QPS: 2628.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   21 | Active: 120
+2026/04/08 13:25:02 [13:25:00] QPS: 2616.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   23 | Active: 120
+2026/04/08 13:25:12 [13:25:10] QPS: 2616.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   24 | Active: 120
+2026/04/08 13:25:22 [13:25:20] QPS: 2616.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   26 | Active: 120
+2026/04/08 13:25:32 [13:25:30] QPS: 2604.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   22 | Active: 120
+2026/04/08 13:25:42 [13:25:40] QPS: 2616.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   23 | Active: 120
+2026/04/08 13:25:52 [13:25:50] QPS: 2616.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   22 | Active: 120
+2026/04/08 13:26:02 [13:26:00] QPS: 2616.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   23 | Active: 120
+2026/04/08 13:26:12 [13:26:10] QPS: 2616.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   23 | Active: 120
+2026/04/08 13:26:22 [13:26:20] QPS: 2592.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  24 / Max:   29 | Active: 120
+2026/04/08 13:26:32 [13:26:30] QPS: 2616.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   28 | Active: 120
+2026/04/08 13:26:32 [13:26:40] QPS: 678.5 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   21 | Active: 0
+2026/04/08 13:26:32 📊 [POST-BENCHMARK] DB Stats -> max_connections: 16000, Max_used_connections: 128
+2026/04/08 13:26:32 Stress test completed. Aggregates in results/qps2000_congested/aggregate.jsonl, errors in results/qps2000_congested/error.jsonl
+📊 Generating plot for congested...
+Plot successfully saved to results/qps2000_congested/plot.png
+✅ Success: Results saved in results/qps2000_congested
+
+⏳ Waiting 30s for environment to settle before next scenario...
+
+🚀 Phase: QPS 3000 - Healthy Case
+   Parameters: -concurrency 75, -sleep_between_attempts 10ms
+2026/04/08 13:27:03 Starting stress test v2 against database-connectivity-instance1-cluster.cluster-c9eaw8m4yzeq.ap-northeast-1.rds.amazonaws.com:3306
+2026/04/08 13:27:03 Run ID: run-1775654823, Base Concurrency: 75, Duration: 5m0s, Window: 10s
+2026/04/08 13:27:03 📊 [PRE-BENCHMARK] DB Stats -> max_connections: 16000, Max_used_connections: 128
+2026/04/08 13:27:13 [13:27:10] QPS: 1957.5 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   27 | Active: 75
+2026/04/08 13:27:23 [13:27:20] QPS: 2962.5 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  21 / Max:   31 | Active: 75
+2026/04/08 13:27:33 [13:27:30] QPS: 2977.3 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   24 | Active: 75
+2026/04/08 13:27:43 [13:27:40] QPS: 2992.5 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   28 | Active: 75
+2026/04/08 13:27:53 [13:27:50] QPS: 2973.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   26 | Active: 75
+2026/04/08 13:28:03 [13:28:00] QPS: 2966.8 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   28 | Active: 75
+2026/04/08 13:28:13 [13:28:10] QPS: 2977.5 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   22 | Active: 75
+2026/04/08 13:28:23 [13:28:20] QPS: 2955.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  21 / Max:   30 | Active: 75
+2026/04/08 13:28:33 [13:28:30] QPS: 2984.9 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   28 | Active: 75
+2026/04/08 13:28:43 [13:28:40] QPS: 2970.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   23 | Active: 75
+2026/04/08 13:28:53 [13:28:50] QPS: 3008.1 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   30 | Active: 75
+2026/04/08 13:29:03 [13:29:00] QPS: 2955.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   27 | Active: 75
+2026/04/08 13:29:13 [13:29:10] QPS: 3006.4 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   28 | Active: 75
+2026/04/08 13:29:23 [13:29:20] QPS: 2970.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   22 | Active: 75
+2026/04/08 13:29:33 [13:29:30] QPS: 2975.5 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   30 | Active: 75
+2026/04/08 13:29:43 [13:29:40] QPS: 3016.6 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  18 / Max:   27 | Active: 75
+2026/04/08 13:29:53 [13:29:50] QPS: 2992.5 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   23 | Active: 75
+2026/04/08 13:30:03 [13:30:00] QPS: 2940.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  21 / Max:   27 | Active: 75
+2026/04/08 13:30:13 [13:30:10] QPS: 2970.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   25 | Active: 75
+2026/04/08 13:30:23 [13:30:20] QPS: 2977.4 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   23 | Active: 75
+2026/04/08 13:30:33 [13:30:30] QPS: 2970.1 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   23 | Active: 75
+2026/04/08 13:30:43 [13:30:40] QPS: 2973.7 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   23 | Active: 75
+2026/04/08 13:30:53 [13:30:50] QPS: 2973.8 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   26 | Active: 75
+2026/04/08 13:31:03 [13:31:00] QPS: 1883.2 | Succ:  99.8% | Latency(ms) P50:  14 / P99:  19 / Max: 5014 | Active: 75 | ERRORS: map[timeout:35]
+2026/04/08 13:31:13 [13:31:10] QPS: 2636.2 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   23 | Active: 75
+2026/04/08 13:31:23 [13:31:20] QPS: 2972.2 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  21 / Max:   28 | Active: 75
+2026/04/08 13:31:33 [13:31:30] QPS: 2962.5 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   23 | Active: 75
+2026/04/08 13:31:43 [13:31:40] QPS: 3000.4 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   27 | Active: 75
+2026/04/08 13:31:53 [13:31:50] QPS: 2984.7 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   31 | Active: 75
+2026/04/08 13:32:03 [13:32:00] QPS: 2975.7 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   31 | Active: 75
+2026/04/08 13:32:03 [13:32:10] QPS: 997.5 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  21 / Max:   27 | Active: 0
+2026/04/08 13:32:03 📊 [POST-BENCHMARK] DB Stats -> max_connections: 16000, Max_used_connections: 128
+2026/04/08 13:32:03 Stress test completed. Aggregates in results/qps3000_healthy/aggregate.jsonl, errors in results/qps3000_healthy/error.jsonl
+📊 Generating plot for healthy...
+Plot successfully saved to results/qps3000_healthy/plot.png
+✅ Success: Results saved in results/qps3000_healthy
+
+⏳ Waiting 30s for environment to settle before next scenario...
+
+🚀 Phase: QPS 3000 - Congested Case
+   Parameters: -concurrency 180, -sleep_between_attempts 30ms
+2026/04/08 13:32:34 Starting stress test v2 against database-connectivity-instance1-cluster.cluster-c9eaw8m4yzeq.ap-northeast-1.rds.amazonaws.com:3306
+2026/04/08 13:32:34 Run ID: run-1775655154, Base Concurrency: 180, Duration: 5m0s, Window: 10s
+2026/04/08 13:32:34 📊 [PRE-BENCHMARK] DB Stats -> max_connections: 16000, Max_used_connections: 128
+2026/04/08 13:32:44 [13:32:40] QPS: 2250.0 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  25 / Max:   44 | Active: 180
+2026/04/08 13:32:54 [13:32:50] QPS: 3902.2 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  19 / Max:   24 | Active: 180
+2026/04/08 13:33:04 [13:33:00] QPS: 3920.9 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   22 | Active: 180
+2026/04/08 13:33:14 [13:33:10] QPS: 3930.9 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   36 | Active: 180
+2026/04/08 13:33:24 [13:33:20] QPS: 3924.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   25 | Active: 180
+2026/04/08 13:33:34 [13:33:30] QPS: 3942.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   24 | Active: 180
+2026/04/08 13:33:44 [13:33:40] QPS: 3942.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   22 | Active: 180
+2026/04/08 13:33:54 [13:33:50] QPS: 3942.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   27 | Active: 180
+2026/04/08 13:34:04 [13:34:00] QPS: 3924.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   22 | Active: 180
+2026/04/08 13:34:14 [13:34:10] QPS: 3942.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  21 / Max:   27 | Active: 180
+2026/04/08 13:34:24 [13:34:20] QPS: 3924.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   29 | Active: 180
+2026/04/08 13:34:34 [13:34:30] QPS: 3942.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   37 | Active: 180
+2026/04/08 13:34:44 [13:34:40] QPS: 3942.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   23 | Active: 180
+2026/04/08 13:34:54 [13:34:50] QPS: 3924.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   26 | Active: 180
+2026/04/08 13:35:04 [13:35:00] QPS: 3924.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   25 | Active: 180
+2026/04/08 13:35:14 [13:35:10] QPS: 3950.8 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   23 | Active: 180
+2026/04/08 13:35:24 [13:35:20] QPS: 3915.2 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   23 | Active: 180
+2026/04/08 13:35:34 [13:35:30] QPS: 3942.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   25 | Active: 180
+2026/04/08 13:35:44 [13:35:40] QPS: 3942.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   29 | Active: 180
+2026/04/08 13:35:54 [13:35:50] QPS: 3942.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   28 | Active: 180
+2026/04/08 13:36:04 [13:36:00] QPS: 3924.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   26 | Active: 180
+2026/04/08 13:36:14 [13:36:10] QPS: 3942.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   22 | Active: 180
+2026/04/08 13:36:24 [13:36:20] QPS: 3924.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  23 / Max:   42 | Active: 180
+2026/04/08 13:36:34 [13:36:30] QPS: 3942.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   21 | Active: 180
+2026/04/08 13:36:44 [13:36:40] QPS: 3942.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   26 | Active: 180
+2026/04/08 13:36:54 [13:36:50] QPS: 3924.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   21 | Active: 180
+2026/04/08 13:37:04 [13:37:00] QPS: 3942.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   22 | Active: 180
+2026/04/08 13:37:14 [13:37:10] QPS: 3925.7 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   22 | Active: 180
+2026/04/08 13:37:24 [13:37:20] QPS: 3940.3 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   26 | Active: 180
+2026/04/08 13:37:34 [13:37:30] QPS: 3942.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   22 | Active: 180
+2026/04/08 13:37:34 [13:37:40] QPS: 1638.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  28 / Max:   31 | Active: 0
+2026/04/08 13:37:34 📊 [POST-BENCHMARK] DB Stats -> max_connections: 16000, Max_used_connections: 190
+2026/04/08 13:37:34 Stress test completed. Aggregates in results/qps3000_congested/aggregate.jsonl, errors in results/qps3000_congested/error.jsonl
+📊 Generating plot for congested...
+Plot successfully saved to results/qps3000_congested/plot.png
+✅ Success: Results saved in results/qps3000_congested
+
+⏳ Waiting 30s for environment to settle before next scenario...
+
+🚀 Phase: QPS 4000 - Healthy Case
+   Parameters: -concurrency 100, -sleep_between_attempts 10ms
+2026/04/08 13:38:04 Starting stress test v2 against database-connectivity-instance1-cluster.cluster-c9eaw8m4yzeq.ap-northeast-1.rds.amazonaws.com:3306
+2026/04/08 13:38:04 Run ID: run-1775655484, Base Concurrency: 100, Duration: 5m0s, Window: 10s
+2026/04/08 13:38:04 📊 [PRE-BENCHMARK] DB Stats -> max_connections: 16000, Max_used_connections: 190
+2026/04/08 13:38:14 [13:38:10] QPS: 2000.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   36 | Active: 100
+2026/04/08 13:38:24 [13:38:20] QPS: 4013.3 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   33 | Active: 100
+2026/04/08 13:38:34 [13:38:30] QPS: 4004.3 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   23 | Active: 100
+2026/04/08 13:38:44 [13:38:40] QPS: 3930.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  18 / Max:   21 | Active: 100
+2026/04/08 13:38:54 [13:38:50] QPS: 3940.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   22 | Active: 100
+2026/04/08 13:39:04 [13:39:00] QPS: 3969.8 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   25 | Active: 100
+2026/04/08 13:39:14 [13:39:10] QPS: 3970.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  21 / Max:   25 | Active: 100
+2026/04/08 13:39:24 [13:39:20] QPS: 3950.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   24 | Active: 100
+2026/04/08 13:39:34 [13:39:30] QPS: 3949.9 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   22 | Active: 100
+2026/04/08 13:39:44 [13:39:40] QPS: 3950.1 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   22 | Active: 100
+2026/04/08 13:39:54 [13:39:50] QPS: 3989.8 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   26 | Active: 100
+2026/04/08 13:40:04 [13:40:00] QPS: 3940.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   39 | Active: 100
+2026/04/08 13:40:14 [13:40:10] QPS: 3950.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   25 | Active: 100
+2026/04/08 13:40:24 [13:40:20] QPS: 3920.4 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   25 | Active: 100
+2026/04/08 13:40:34 [13:40:30] QPS: 3950.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   22 | Active: 100
+2026/04/08 13:40:44 [13:40:40] QPS: 3950.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  18 / Max:   31 | Active: 100
+2026/04/08 13:40:54 [13:40:50] QPS: 3950.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   22 | Active: 100
+2026/04/08 13:41:04 [13:41:00] QPS: 3930.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   22 | Active: 100
+2026/04/08 13:41:14 [13:41:10] QPS: 3930.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   26 | Active: 100
+2026/04/08 13:41:24 [13:41:20] QPS: 3930.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   25 | Active: 100
+2026/04/08 13:41:34 [13:41:30] QPS: 3950.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   22 | Active: 100
+2026/04/08 13:41:44 [13:41:40] QPS: 3950.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   25 | Active: 100
+2026/04/08 13:41:54 [13:41:50] QPS: 3960.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   22 | Active: 100
+2026/04/08 13:42:04 [13:42:00] QPS: 3940.4 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   22 | Active: 100
+2026/04/08 13:42:14 [13:42:10] QPS: 3960.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  18 / Max:   25 | Active: 100
+2026/04/08 13:42:24 [13:42:20] QPS: 3917.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  21 / Max:   29 | Active: 100
+2026/04/08 13:42:34 [13:42:30] QPS: 3978.8 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   25 | Active: 100
+2026/04/08 13:42:44 [13:42:40] QPS: 3959.1 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  18 / Max:   25 | Active: 100
+2026/04/08 13:42:54 [13:42:50] QPS: 3976.5 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   22 | Active: 100
+2026/04/08 13:43:04 [13:43:00] QPS: 3950.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  23 / Max:   40 | Active: 100
+2026/04/08 13:43:04 [13:43:10] QPS: 1970.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   22 | Active: 0
+2026/04/08 13:43:04 📊 [POST-BENCHMARK] DB Stats -> max_connections: 16000, Max_used_connections: 190
+2026/04/08 13:43:04 Stress test completed. Aggregates in results/qps4000_healthy/aggregate.jsonl, errors in results/qps4000_healthy/error.jsonl
+📊 Generating plot for healthy...
+Plot successfully saved to results/qps4000_healthy/plot.png
+✅ Success: Results saved in results/qps4000_healthy
+
+⏳ Waiting 30s for environment to settle before next scenario...
+
+🚀 Phase: QPS 4000 - Congested Case
+   Parameters: -concurrency 240, -sleep_between_attempts 30ms
+2026/04/08 13:43:35 Starting stress test v2 against database-connectivity-instance1-cluster.cluster-c9eaw8m4yzeq.ap-northeast-1.rds.amazonaws.com:3306
+2026/04/08 13:43:35 Run ID: run-1775655815, Base Concurrency: 240, Duration: 5m0s, Window: 10s
+2026/04/08 13:43:35 📊 [PRE-BENCHMARK] DB Stats -> max_connections: 16000, Max_used_connections: 190
+2026/04/08 13:43:45 [13:43:40] QPS: 2140.2 | Succ: 100.0% | Latency(ms) P50:  16 / P99:  52 / Max:   64 | Active: 240
+2026/04/08 13:43:55 [13:43:50] QPS: 5112.0 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  23 / Max:   35 | Active: 240
+2026/04/08 13:44:05 [13:44:00] QPS: 5168.7 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  21 / Max:   35 | Active: 240
+2026/04/08 13:44:15 [13:44:10] QPS: 5255.9 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   24 | Active: 240
+2026/04/08 13:44:25 [13:44:20] QPS: 5232.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   25 | Active: 240
+2026/04/08 13:44:35 [13:44:30] QPS: 5256.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   25 | Active: 240
+2026/04/08 13:44:45 [13:44:40] QPS: 5256.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   25 | Active: 240
+2026/04/08 13:44:55 [13:44:50] QPS: 5256.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  21 / Max:   25 | Active: 240
+2026/04/08 13:45:05 [13:45:00] QPS: 5139.1 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  23 / Max:   36 | Active: 240
+2026/04/08 13:45:15 [13:45:10] QPS: 5252.9 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   27 | Active: 240
+2026/04/08 13:45:25 [13:45:20] QPS: 5256.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   22 | Active: 240
+2026/04/08 13:45:35 [13:45:30] QPS: 5232.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   23 | Active: 240
+2026/04/08 13:45:45 [13:45:40] QPS: 5256.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  21 / Max:   25 | Active: 240
+2026/04/08 13:45:55 [13:45:50] QPS: 5256.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  22 / Max:   31 | Active: 240
+2026/04/08 13:46:05 [13:46:00] QPS: 5227.5 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   24 | Active: 240
+2026/04/08 13:46:15 [13:46:10] QPS: 5236.5 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   24 | Active: 240
+2026/04/08 13:46:25 [13:46:20] QPS: 5235.5 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  22 / Max:   33 | Active: 240
+2026/04/08 13:46:35 [13:46:30] QPS: 5252.5 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   25 | Active: 240
+2026/04/08 13:46:45 [13:46:40] QPS: 5256.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  18 / Max:   24 | Active: 240
+2026/04/08 13:46:55 [13:46:50] QPS: 5256.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   23 | Active: 240
+2026/04/08 13:47:05 [13:47:00] QPS: 5232.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   24 | Active: 240
+2026/04/08 13:47:15 [13:47:10] QPS: 5256.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   23 | Active: 240
+2026/04/08 13:47:25 [13:47:20] QPS: 5208.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  21 / Max:   25 | Active: 240
+2026/04/08 13:47:35 [13:47:30] QPS: 5232.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   35 | Active: 240
+2026/04/08 13:47:45 [13:47:40] QPS: 5256.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   25 | Active: 240
+2026/04/08 13:47:55 [13:47:50] QPS: 5256.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   25 | Active: 240
+2026/04/08 13:48:05 [13:48:00] QPS: 5232.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   25 | Active: 240
+2026/04/08 13:48:15 [13:48:10] QPS: 5232.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  21 / Max:   34 | Active: 240
+2026/04/08 13:48:25 [13:48:20] QPS: 5232.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   26 | Active: 240
+2026/04/08 13:48:35 [13:48:30] QPS: 5256.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   24 | Active: 240
+2026/04/08 13:48:35 [13:48:40] QPS: 3004.2 | Succ:  99.9% | Latency(ms) P50:  14 / P99:  19 / Max:   23 | Active: 0 | ERRORS: map[timeout:35]
+2026/04/08 13:48:35 📊 [POST-BENCHMARK] DB Stats -> max_connections: 16000, Max_used_connections: 295
+2026/04/08 13:48:35 Stress test completed. Aggregates in results/qps4000_congested/aggregate.jsonl, errors in results/qps4000_congested/error.jsonl
+📊 Generating plot for congested...
+Plot successfully saved to results/qps4000_congested/plot.png
+✅ Success: Results saved in results/qps4000_congested
+
+⏳ Waiting 30s for environment to settle before next scenario...
+
+🚀 Phase: QPS 5000 - Healthy Case
+   Parameters: -concurrency 125, -sleep_between_attempts 10ms
+2026/04/08 13:49:06 Starting stress test v2 against database-connectivity-instance1-cluster.cluster-c9eaw8m4yzeq.ap-northeast-1.rds.amazonaws.com:3306
+2026/04/08 13:49:06 Run ID: run-1775656146, Base Concurrency: 125, Duration: 5m0s, Window: 10s
+2026/04/08 13:49:06 📊 [PRE-BENCHMARK] DB Stats -> max_connections: 16000, Max_used_connections: 295
+2026/04/08 13:49:16 [13:49:10] QPS: 1764.9 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   32 | Active: 125
+2026/04/08 13:49:26 [13:49:20] QPS: 2600.8 | Succ:  99.6% | Latency(ms) P50:  13 / P99:  18 / Max: 5011 | Active: 125 | ERRORS: map[timeout:113]
+2026/04/08 13:49:36 [13:49:30] QPS: 2582.9 | Succ:  99.9% | Latency(ms) P50:  13 / P99:  19 / Max: 5015 | Active: 125 | ERRORS: map[timeout:15]
+2026/04/08 13:49:46 [13:49:40] QPS: 5022.9 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   29 | Active: 125
+2026/04/08 13:49:56 [13:49:50] QPS: 5077.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   29 | Active: 125
+2026/04/08 13:50:06 [13:50:00] QPS: 5008.6 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  21 / Max:   29 | Active: 125
+2026/04/08 13:50:16 [13:50:10] QPS: 5042.2 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   26 | Active: 125
+2026/04/08 13:50:26 [13:50:20] QPS: 5009.9 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  21 / Max:   31 | Active: 125
+2026/04/08 13:50:36 [13:50:30] QPS: 5000.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   23 | Active: 125
+2026/04/08 13:50:46 [13:50:40] QPS: 5098.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   25 | Active: 125
+2026/04/08 13:50:56 [13:50:50] QPS: 5115.6 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   30 | Active: 125
+2026/04/08 13:51:06 [13:51:00] QPS: 5012.7 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   28 | Active: 125
+2026/04/08 13:51:16 [13:51:10] QPS: 4962.5 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   21 | Active: 125
+2026/04/08 13:51:26 [13:51:20] QPS: 5030.2 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   25 | Active: 125
+2026/04/08 13:51:36 [13:51:30] QPS: 5040.5 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   26 | Active: 125
+2026/04/08 13:51:46 [13:51:40] QPS: 5025.8 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   28 | Active: 125
+2026/04/08 13:51:56 [13:51:50] QPS: 5000.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   24 | Active: 125
+2026/04/08 13:52:06 [13:52:00] QPS: 3167.7 | Succ:  99.8% | Latency(ms) P50:  14 / P99:  23 / Max: 5010 | Active: 125 | ERRORS: map[timeout:76]
+2026/04/08 13:52:16 [13:52:10] QPS: 4380.9 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   22 | Active: 125
+2026/04/08 13:52:26 [13:52:20] QPS: 5000.9 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   26 | Active: 125
+2026/04/08 13:52:36 [13:52:30] QPS: 5012.5 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   23 | Active: 125
+2026/04/08 13:52:46 [13:52:40] QPS: 5012.5 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   23 | Active: 125
+2026/04/08 13:52:56 [13:52:50] QPS: 5075.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   28 | Active: 125
+2026/04/08 13:53:06 [13:53:00] QPS: 5012.9 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   24 | Active: 125
+2026/04/08 13:53:16 [13:53:10] QPS: 5025.4 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   30 | Active: 125
+2026/04/08 13:53:26 [13:53:20] QPS: 4984.4 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  22 / Max:   32 | Active: 125
+2026/04/08 13:53:36 [13:53:30] QPS: 5000.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   21 | Active: 125
+2026/04/08 13:53:46 [13:53:40] QPS: 5007.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   22 | Active: 125
+2026/04/08 13:53:56 [13:53:50] QPS: 4980.5 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   31 | Active: 125
+2026/04/08 13:54:06 [13:54:00] QPS: 4950.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   26 | Active: 125
+2026/04/08 13:54:06 [13:54:10] QPS: 3237.5 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   27 | Active: 0
+2026/04/08 13:54:06 📊 [POST-BENCHMARK] DB Stats -> max_connections: 16000, Max_used_connections: 295
+2026/04/08 13:54:06 Stress test completed. Aggregates in results/qps5000_healthy/aggregate.jsonl, errors in results/qps5000_healthy/error.jsonl
+📊 Generating plot for healthy...
+Plot successfully saved to results/qps5000_healthy/plot.png
+✅ Success: Results saved in results/qps5000_healthy
+
+⏳ Waiting 30s for environment to settle before next scenario...
+
+🚀 Phase: QPS 5000 - Congested Case
+   Parameters: -concurrency 300, -sleep_between_attempts 30ms
+2026/04/08 13:54:37 Starting stress test v2 against database-connectivity-instance1-cluster.cluster-c9eaw8m4yzeq.ap-northeast-1.rds.amazonaws.com:3306
+2026/04/08 13:54:37 Run ID: run-1775656477, Base Concurrency: 300, Duration: 5m0s, Window: 10s
+2026/04/08 13:54:37 📊 [PRE-BENCHMARK] DB Stats -> max_connections: 16000, Max_used_connections: 295
+2026/04/08 13:54:47 [13:54:40] QPS: 1751.7 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  52 / Max:   57 | Active: 300
+2026/04/08 13:54:57 [13:54:50] QPS: 6482.1 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  22 / Max:   31 | Active: 300
+2026/04/08 13:55:07 [13:55:00] QPS: 6391.0 | Succ: 100.0% | Latency(ms) P50:  16 / P99:  24 / Max:   29 | Active: 300
+2026/04/08 13:55:17 [13:55:10] QPS: 6468.8 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  21 / Max:   30 | Active: 300
+2026/04/08 13:55:27 [13:55:20] QPS: 6420.0 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  21 / Max:   26 | Active: 300
+2026/04/08 13:55:37 [13:55:30] QPS: 6538.7 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   32 | Active: 300
+2026/04/08 13:55:47 [13:55:40] QPS: 6541.3 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   24 | Active: 300
+2026/04/08 13:55:57 [13:55:50] QPS: 6540.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   22 | Active: 300
+2026/04/08 13:56:07 [13:56:00] QPS: 6510.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   27 | Active: 300
+2026/04/08 13:56:17 [13:56:10] QPS: 6566.6 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   26 | Active: 300
+2026/04/08 13:56:27 [13:56:20] QPS: 6513.4 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  21 / Max:   29 | Active: 300
+2026/04/08 13:56:37 [13:56:30] QPS: 6540.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   24 | Active: 300
+2026/04/08 13:56:47 [13:56:40] QPS: 6570.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   24 | Active: 300
+2026/04/08 13:56:57 [13:56:50] QPS: 6570.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   22 | Active: 300
+2026/04/08 13:57:07 [13:57:00] QPS: 6540.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  21 / Max:   35 | Active: 300
+2026/04/08 13:57:17 [13:57:10] QPS: 6540.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   29 | Active: 300
+2026/04/08 13:57:27 [13:57:20] QPS: 6540.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   23 | Active: 300
+2026/04/08 13:57:37 [13:57:30] QPS: 6540.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   33 | Active: 300
+2026/04/08 13:57:47 [13:57:40] QPS: 6570.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   28 | Active: 300
+2026/04/08 13:57:57 [13:57:50] QPS: 6540.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   23 | Active: 300
+2026/04/08 13:58:07 [13:58:00] QPS: 6539.4 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  21 / Max:   27 | Active: 300
+2026/04/08 13:58:17 [13:58:10] QPS: 6540.6 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   23 | Active: 300
+2026/04/08 13:58:27 [13:58:20] QPS: 6540.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   23 | Active: 300
+2026/04/08 13:58:37 [13:58:30] QPS: 6540.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   32 | Active: 300
+2026/04/08 13:58:47 [13:58:40] QPS: 6570.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   27 | Active: 300
+2026/04/08 13:58:57 [13:58:50] QPS: 6540.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   26 | Active: 300
+2026/04/08 13:59:07 [13:59:00] QPS: 6540.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   23 | Active: 300
+2026/04/08 13:59:17 [13:59:10] QPS: 6540.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   24 | Active: 300
+2026/04/08 13:59:27 [13:59:20] QPS: 6540.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  21 / Max:   28 | Active: 300
+2026/04/08 13:59:37 [13:59:30] QPS: 6570.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   29 | Active: 300
+2026/04/08 13:59:37 [13:59:40] QPS: 4770.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   23 | Active: 0
+2026/04/08 13:59:37 📊 [POST-BENCHMARK] DB Stats -> max_connections: 16000, Max_used_connections: 354
+2026/04/08 13:59:37 Stress test completed. Aggregates in results/qps5000_congested/aggregate.jsonl, errors in results/qps5000_congested/error.jsonl
+📊 Generating plot for congested...
+Plot successfully saved to results/qps5000_congested/plot.png
+✅ Success: Results saved in results/qps5000_congested
+
+⏳ Waiting 30s for environment to settle before next scenario...
+
+🚀 Phase: QPS 6000 - Healthy Case
+   Parameters: -concurrency 150, -sleep_between_attempts 10ms
+2026/04/08 14:00:08 Starting stress test v2 against database-connectivity-instance1-cluster.cluster-c9eaw8m4yzeq.ap-northeast-1.rds.amazonaws.com:3306
+2026/04/08 14:00:08 Run ID: run-1775656808, Base Concurrency: 150, Duration: 5m0s, Window: 10s
+2026/04/08 14:00:08 📊 [PRE-BENCHMARK] DB Stats -> max_connections: 16000, Max_used_connections: 354
+2026/04/08 14:00:18 [14:00:10] QPS: 1095.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  37 / Max:   41 | Active: 150
+2026/04/08 14:00:28 [14:00:20] QPS: 6031.1 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   31 | Active: 150
+2026/04/08 14:00:38 [14:00:30] QPS: 6133.3 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   29 | Active: 150
+2026/04/08 14:00:48 [14:00:40] QPS: 6117.6 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   23 | Active: 150
+2026/04/08 14:00:58 [14:00:50] QPS: 3069.3 | Succ:  99.7% | Latency(ms) P50:  14 / P99:  19 / Max: 5013 | Active: 150 | ERRORS: map[timeout:98]
+2026/04/08 14:01:08 [14:01:00] QPS: 6077.5 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   31 | Active: 150
+2026/04/08 14:01:18 [14:01:10] QPS: 4050.9 | Succ:  99.8% | Latency(ms) P50:  14 / P99:  18 / Max: 5013 | Active: 150 | ERRORS: map[timeout:75]
+2026/04/08 14:01:28 [14:01:20] QPS: 5124.2 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   36 | Active: 150
+2026/04/08 14:01:38 [14:01:30] QPS: 6112.2 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   28 | Active: 150
+2026/04/08 14:01:48 [14:01:40] QPS: 6015.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   24 | Active: 150
+2026/04/08 14:01:58 [14:01:50] QPS: 5995.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   31 | Active: 150
+2026/04/08 14:02:08 [14:02:00] QPS: 6014.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  21 / Max:   25 | Active: 150
+2026/04/08 14:02:18 [14:02:10] QPS: 6000.9 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   22 | Active: 150
+2026/04/08 14:02:28 [14:02:20] QPS: 6012.2 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   30 | Active: 150
+2026/04/08 14:02:38 [14:02:30] QPS: 5985.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   30 | Active: 150
+2026/04/08 14:02:48 [14:02:40] QPS: 6029.9 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   38 | Active: 150
+2026/04/08 14:02:58 [14:02:50] QPS: 6045.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  18 / Max:   21 | Active: 150
+2026/04/08 14:03:08 [14:03:00] QPS: 5985.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  21 / Max:   28 | Active: 150
+2026/04/08 14:03:18 [14:03:10] QPS: 6030.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   26 | Active: 150
+2026/04/08 14:03:28 [14:03:20] QPS: 5925.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   30 | Active: 150
+2026/04/08 14:03:38 [14:03:30] QPS: 6021.1 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   30 | Active: 150
+2026/04/08 14:03:48 [14:03:40] QPS: 5970.4 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   22 | Active: 150
+2026/04/08 14:03:58 [14:03:50] QPS: 5985.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  18 / Max:   22 | Active: 150
+2026/04/08 14:04:08 [14:04:00] QPS: 5985.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   22 | Active: 150
+2026/04/08 14:04:18 [14:04:10] QPS: 6000.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   24 | Active: 150
+2026/04/08 14:04:28 [14:04:20] QPS: 5985.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  18 / Max:   21 | Active: 150
+2026/04/08 14:04:38 [14:04:30] QPS: 5970.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   24 | Active: 150
+2026/04/08 14:04:48 [14:04:40] QPS: 5955.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   31 | Active: 150
+2026/04/08 14:04:58 [14:04:50] QPS: 5999.9 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  18 / Max:   24 | Active: 150
+2026/04/08 14:05:08 [14:05:00] QPS: 5987.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   27 | Active: 150
+2026/04/08 14:05:08 [14:05:10] QPS: 4950.2 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   30 | Active: 0 | ERRORS: map[timeout:16]
+2026/04/08 14:05:08 📊 [POST-BENCHMARK] DB Stats -> max_connections: 16000, Max_used_connections: 354
+2026/04/08 14:05:08 Stress test completed. Aggregates in results/qps6000_healthy/aggregate.jsonl, errors in results/qps6000_healthy/error.jsonl
+📊 Generating plot for healthy...
+Plot successfully saved to results/qps6000_healthy/plot.png
+✅ Success: Results saved in results/qps6000_healthy
+
+⏳ Waiting 30s for environment to settle before next scenario...
+
+🚀 Phase: QPS 6000 - Congested Case
+   Parameters: -concurrency 360, -sleep_between_attempts 30ms
+2026/04/08 14:05:38 Starting stress test v2 against database-connectivity-instance1-cluster.cluster-c9eaw8m4yzeq.ap-northeast-1.rds.amazonaws.com:3306
+2026/04/08 14:05:38 Run ID: run-1775657138, Base Concurrency: 360, Duration: 5m0s, Window: 10s
+2026/04/08 14:05:38 📊 [PRE-BENCHMARK] DB Stats -> max_connections: 16000, Max_used_connections: 354
+2026/04/08 14:05:48 [14:05:40] QPS: 740.3 | Succ: 100.0% | Latency(ms) P50:  17 / P99: 145 / Max:  146 | Active: 360
+2026/04/08 14:05:58 [14:05:50] QPS: 7936.7 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   30 | Active: 360
+2026/04/08 14:06:08 [14:06:00] QPS: 7632.0 | Succ: 100.0% | Latency(ms) P50:  16 / P99:  23 / Max:   33 | Active: 360
+2026/04/08 14:06:18 [14:06:10] QPS: 7704.0 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  22 / Max:   28 | Active: 360
+2026/04/08 14:06:28 [14:06:20] QPS: 7776.0 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  24 / Max:   28 | Active: 360
+2026/04/08 14:06:38 [14:06:30] QPS: 7812.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   28 | Active: 360
+2026/04/08 14:06:48 [14:06:40] QPS: 7812.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  21 / Max:   24 | Active: 360
+2026/04/08 14:06:58 [14:06:50] QPS: 7848.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  21 / Max:   31 | Active: 360
+2026/04/08 14:07:08 [14:07:00] QPS: 7812.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  22 / Max:   28 | Active: 360
+2026/04/08 14:07:18 [14:07:10] QPS: 7849.2 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   25 | Active: 360
+2026/04/08 14:07:28 [14:07:20] QPS: 7846.8 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   34 | Active: 360
+2026/04/08 14:07:38 [14:07:30] QPS: 7848.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   28 | Active: 360
+2026/04/08 14:07:48 [14:07:40] QPS: 7848.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   25 | Active: 360
+2026/04/08 14:07:58 [14:07:50] QPS: 7848.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   24 | Active: 360
+2026/04/08 14:08:08 [14:08:00] QPS: 7812.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   24 | Active: 360
+2026/04/08 14:08:18 [14:08:10] QPS: 7848.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   22 | Active: 360
+2026/04/08 14:08:28 [14:08:20] QPS: 7848.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  24 / Max:   31 | Active: 360
+2026/04/08 14:08:38 [14:08:30] QPS: 7848.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   23 | Active: 360
+2026/04/08 14:08:48 [14:08:40] QPS: 7848.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   25 | Active: 360
+2026/04/08 14:08:58 [14:08:50] QPS: 7848.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   26 | Active: 360
+2026/04/08 14:09:08 [14:09:00] QPS: 7812.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  21 / Max:   26 | Active: 360
+2026/04/08 14:09:18 [14:09:10] QPS: 7848.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   24 | Active: 360
+2026/04/08 14:09:28 [14:09:20] QPS: 7848.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   23 | Active: 360
+2026/04/08 14:09:38 [14:09:30] QPS: 7848.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   24 | Active: 360
+2026/04/08 14:09:48 [14:09:40] QPS: 7812.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   24 | Active: 360
+2026/04/08 14:09:58 [14:09:50] QPS: 7850.3 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   25 | Active: 360
+2026/04/08 14:10:08 [14:10:00] QPS: 7845.7 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  21 / Max:   28 | Active: 360
+2026/04/08 14:10:18 [14:10:10] QPS: 7848.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   25 | Active: 360
+2026/04/08 14:10:28 [14:10:20] QPS: 7812.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   22 | Active: 360
+2026/04/08 14:10:38 [14:10:30] QPS: 7848.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   27 | Active: 360
+2026/04/08 14:10:38 [14:10:40] QPS: 6960.2 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  22 / Max:   62 | Active: 0
+2026/04/08 14:10:38 📊 [POST-BENCHMARK] DB Stats -> max_connections: 16000, Max_used_connections: 429
+2026/04/08 14:10:38 Stress test completed. Aggregates in results/qps6000_congested/aggregate.jsonl, errors in results/qps6000_congested/error.jsonl
+📊 Generating plot for congested...
+Plot successfully saved to results/qps6000_congested/plot.png
+✅ Success: Results saved in results/qps6000_congested
+
+⏳ Waiting 30s for environment to settle before next scenario...
+
+🚀 Phase: QPS 7000 - Healthy Case
+   Parameters: -concurrency 175, -sleep_between_attempts 10ms
+2026/04/08 14:11:09 Starting stress test v2 against database-connectivity-instance1-cluster.cluster-c9eaw8m4yzeq.ap-northeast-1.rds.amazonaws.com:3306
+2026/04/08 14:11:09 Run ID: run-1775657469, Base Concurrency: 175, Duration: 5m0s, Window: 10s
+2026/04/08 14:11:09 📊 [PRE-BENCHMARK] DB Stats -> max_connections: 16000, Max_used_connections: 429
+2026/04/08 14:11:19 [14:11:10] QPS: 166.1 | Succ: 100.0% | Latency(ms) P50:  16 / P99:  50 / Max:   52 | Active: 175
+2026/04/08 14:11:29 [14:11:20] QPS: 6871.9 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  21 / Max:   32 | Active: 175
+2026/04/08 14:11:39 [14:11:30] QPS: 7116.6 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   27 | Active: 175
+2026/04/08 14:11:49 [14:11:40] QPS: 5036.0 | Succ:  99.8% | Latency(ms) P50:  13 / P99:  19 / Max: 5013 | Active: 175 | ERRORS: map[timeout:95]
+2026/04/08 14:11:59 [14:11:50] QPS: 5679.8 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   23 | Active: 175
+2026/04/08 14:12:09 [14:12:00] QPS: 5087.5 | Succ:  99.8% | Latency(ms) P50:  14 / P99:  22 / Max: 5013 | Active: 175 | ERRORS: map[timeout:107]
+2026/04/08 14:12:19 [14:12:10] QPS: 5566.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   24 | Active: 175
+2026/04/08 14:12:29 [14:12:20] QPS: 7111.3 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   27 | Active: 175
+2026/04/08 14:12:39 [14:12:30] QPS: 4989.8 | Succ:  99.8% | Latency(ms) P50:  13 / P99:  19 / Max: 5011 | Active: 175 | ERRORS: map[timeout:110]
+2026/04/08 14:12:49 [14:12:40] QPS: 5752.3 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   26 | Active: 175
+2026/04/08 14:12:59 [14:12:50] QPS: 6780.4 | Succ:  99.9% | Latency(ms) P50:  13 / P99:  20 / Max: 5014 | Active: 175 | ERRORS: map[timeout:54]
+2026/04/08 14:13:09 [14:13:00] QPS: 3965.9 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   25 | Active: 175
+2026/04/08 14:13:19 [14:13:10] QPS: 7118.6 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   33 | Active: 175
+2026/04/08 14:13:29 [14:13:20] QPS: 7043.5 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  22 / Max:   27 | Active: 175
+2026/04/08 14:13:39 [14:13:30] QPS: 7182.3 | Succ: 100.0% | Latency(ms) P50:  13 / P99:  19 / Max:   24 | Active: 175
+2026/04/08 14:13:49 [14:13:40] QPS: 3561.9 | Succ:  99.7% | Latency(ms) P50:  14 / P99:  19 / Max: 5014 | Active: 175 | ERRORS: map[timeout:94]
+2026/04/08 14:13:59 [14:13:50] QPS: 4432.9 | Succ:  99.8% | Latency(ms) P50:  13 / P99:  20 / Max: 5020 | Active: 175 | ERRORS: map[timeout:99]
+2026/04/08 14:14:09 [14:14:00] QPS: 5134.4 | Succ:  99.8% | Latency(ms) P50:  14 / P99:  19 / Max: 5013 | Active: 175 | ERRORS: map[timeout:125]
+2026/04/08 14:14:19 [14:14:10] QPS: 4701.2 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   24 | Active: 175
+2026/04/08 14:14:29 [14:14:20] QPS: 6992.2 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  21 / Max:   34 | Active: 175
+2026/04/08 14:14:39 [14:14:30] QPS: 7068.4 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   35 | Active: 175
+2026/04/08 14:14:49 [14:14:40] QPS: 6985.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   26 | Active: 175
+2026/04/08 14:14:59 [14:14:50] QPS: 6993.7 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   23 | Active: 175
+2026/04/08 14:15:09 [14:15:00] QPS: 6867.7 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  21 / Max:   31 | Active: 175
+2026/04/08 14:15:19 [14:15:10] QPS: 7054.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  18 / Max:   21 | Active: 175
+2026/04/08 14:15:29 [14:15:20] QPS: 7049.6 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   27 | Active: 175
+2026/04/08 14:15:39 [14:15:30] QPS: 7049.5 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   33 | Active: 175
+2026/04/08 14:15:49 [14:15:40] QPS: 7059.4 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   22 | Active: 175
+2026/04/08 14:15:59 [14:15:50] QPS: 7037.9 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   30 | Active: 175
+2026/04/08 14:16:09 [14:16:00] QPS: 6995.5 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   32 | Active: 175
+2026/04/08 14:16:09 [14:16:10] QPS: 6808.9 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  21 / Max:   28 | Active: 0
+2026/04/08 14:16:09 📊 [POST-BENCHMARK] DB Stats -> max_connections: 16000, Max_used_connections: 429
+2026/04/08 14:16:09 Stress test completed. Aggregates in results/qps7000_healthy/aggregate.jsonl, errors in results/qps7000_healthy/error.jsonl
+📊 Generating plot for healthy...
+Plot successfully saved to results/qps7000_healthy/plot.png
+✅ Success: Results saved in results/qps7000_healthy
+
+⏳ Waiting 30s for environment to settle before next scenario...
+
+🚀 Phase: QPS 7000 - Congested Case
+   Parameters: -concurrency 420, -sleep_between_attempts 30ms
+2026/04/08 14:16:40 Starting stress test v2 against database-connectivity-instance1-cluster.cluster-c9eaw8m4yzeq.ap-northeast-1.rds.amazonaws.com:3306
+2026/04/08 14:16:40 Run ID: run-1775657800, Base Concurrency: 420, Duration: 5m0s, Window: 10s
+2026/04/08 14:16:40 📊 [PRE-BENCHMARK] DB Stats -> max_connections: 16000, Max_used_connections: 429
+2026/04/08 14:16:50 [14:16:50] QPS: 7057.9 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  30 / Max:   61 | Active: 420
+2026/04/08 14:17:00 [14:16:50] QPS:  42.0 | Succ:  63.3% | Latency(ms) P50: 5008 / P99: 5018 / Max: 5020 | Active: 420 | ERRORS: map[timeout:154]
+2026/04/08 14:17:00 [14:17:00] QPS: 5800.9 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  25 / Max:   29 | Active: 420
+2026/04/08 14:17:10 [14:17:10] QPS: 9230.7 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  22 / Max:   31 | Active: 420
+2026/04/08 14:17:20 [14:17:20] QPS: 9292.7 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  21 / Max:   30 | Active: 420
+2026/04/08 14:17:30 [14:17:30] QPS: 9314.1 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  21 / Max:   28 | Active: 420
+2026/04/08 14:17:40 [14:17:40] QPS: 4653.3 | Succ:  99.9% | Latency(ms) P50:  14 / P99:  32 / Max: 5026 | Active: 420 | ERRORS: map[timeout:43]
+2026/04/08 14:17:50 [14:17:50] QPS: 8741.1 | Succ: 100.0% | Latency(ms) P50:  16 / P99:  28 / Max:   33 | Active: 420
+2026/04/08 14:18:00 [14:18:00] QPS: 9251.2 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  22 / Max:   41 | Active: 420
+2026/04/08 14:18:10 [14:18:10] QPS: 9117.4 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  23 / Max:   29 | Active: 420
+2026/04/08 14:18:20 [14:18:20] QPS: 9216.5 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   25 | Active: 420
+2026/04/08 14:18:30 [14:18:30] QPS: 4855.6 | Succ:  99.5% | Latency(ms) P50:  14 / P99:  20 / Max: 5013 | Active: 420 | ERRORS: map[timeout:251]
+2026/04/08 14:18:40 [14:18:40] QPS: 8698.8 | Succ: 100.0% | Latency(ms) P50:  16 / P99:  26 / Max:   32 | Active: 420
+2026/04/08 14:18:50 [14:18:50] QPS: 6309.1 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   27 | Active: 420
+2026/04/08 14:19:00 [14:18:50] QPS:  42.0 | Succ:  42.1% | Latency(ms) P50: 4999 / P99: 5016 / Max: 5017 | Active: 420 | ERRORS: map[timeout:243]
+2026/04/08 14:19:00 [14:19:00] QPS: 7229.7 | Succ: 100.0% | Latency(ms) P50:  17 / P99:  26 / Max:   29 | Active: 420
+2026/04/08 14:19:10 [14:19:10] QPS: 5971.7 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   28 | Active: 420
+2026/04/08 14:19:20 [14:19:10] QPS:  42.0 | Succ:  50.2% | Latency(ms) P50: 4994 / P99: 5016 / Max: 5017 | Active: 420 | ERRORS: map[timeout:209]
+2026/04/08 14:19:20 [14:19:20] QPS: 7709.3 | Succ: 100.0% | Latency(ms) P50:  16 / P99:  23 / Max:   30 | Active: 420
+2026/04/08 14:19:30 [14:19:30] QPS: 9041.6 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  26 / Max:   40 | Active: 420
+2026/04/08 14:19:40 [14:19:40] QPS: 9306.3 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  22 / Max:   31 | Active: 420
+2026/04/08 14:19:50 [14:19:50] QPS: 8375.7 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  21 / Max:   26 | Active: 420
+2026/04/08 14:20:00 [14:19:50] QPS:  42.0 | Succ:  82.1% | Latency(ms) P50: 5006 / P99: 5025 / Max: 5025 | Active: 420 | ERRORS: map[timeout:75]
+2026/04/08 14:20:00 [14:20:00] QPS: 5181.1 | Succ: 100.0% | Latency(ms) P50:  17 / P99:  27 / Max:   30 | Active: 420
+2026/04/08 14:20:10 [14:20:10] QPS: 4427.2 | Succ:  99.8% | Latency(ms) P50:  15 / P99:  31 / Max: 5023 | Active: 420 | ERRORS: map[timeout:91]
+2026/04/08 14:20:20 [14:20:20] QPS: 9089.3 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  24 / Max:   38 | Active: 420
+2026/04/08 14:20:30 [14:20:30] QPS: 8913.2 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  22 / Max:   34 | Active: 420
+2026/04/08 14:20:40 [14:20:30] QPS:  42.0 | Succ:  65.5% | Latency(ms) P50: 4999 / P99: 5019 / Max: 5020 | Active: 420 | ERRORS: map[timeout:145]
+2026/04/08 14:20:40 [14:20:40] QPS: 4553.5 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  25 / Max:   29 | Active: 420
+2026/04/08 14:20:50 [14:20:50] QPS: 9320.3 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   29 | Active: 420
+2026/04/08 14:21:00 [14:21:00] QPS: 8939.6 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  23 / Max:   28 | Active: 420
+2026/04/08 14:21:10 [14:21:10] QPS: 9030.1 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  22 / Max:   31 | Active: 420
+2026/04/08 14:21:20 [14:21:20] QPS: 9149.4 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  22 / Max:   29 | Active: 420
+2026/04/08 14:21:30 [14:21:30] QPS: 9156.0 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  21 / Max:   30 | Active: 420
+2026/04/08 14:21:40 [14:21:40] QPS: 9364.9 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   27 | Active: 420
+2026/04/08 14:21:40 [14:21:50] QPS: 479.6 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  19 / Max:   19 | Active: 0
+2026/04/08 14:21:40 📊 [POST-BENCHMARK] DB Stats -> max_connections: 16000, Max_used_connections: 573
+2026/04/08 14:21:40 Stress test completed. Aggregates in results/qps7000_congested/aggregate.jsonl, errors in results/qps7000_congested/error.jsonl
+📊 Generating plot for congested...
+Plot successfully saved to results/qps7000_congested/plot.png
+✅ Success: Results saved in results/qps7000_congested
+
+⏳ Waiting 30s for environment to settle before next scenario...
+
+🚀 Phase: QPS 8000 - Healthy Case
+   Parameters: -concurrency 200, -sleep_between_attempts 10ms
+2026/04/08 14:22:11 Starting stress test v2 against database-connectivity-instance1-cluster.cluster-c9eaw8m4yzeq.ap-northeast-1.rds.amazonaws.com:3306
+2026/04/08 14:22:11 Run ID: run-1775658131, Base Concurrency: 200, Duration: 5m0s, Window: 10s
+2026/04/08 14:22:11 📊 [PRE-BENCHMARK] DB Stats -> max_connections: 16000, Max_used_connections: 573
+2026/04/08 14:22:21 [14:22:20] QPS: 6918.2 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  21 / Max:   47 | Active: 200
+2026/04/08 14:22:31 [14:22:30] QPS: 4031.6 | Succ:  99.8% | Latency(ms) P50:  14 / P99:  25 / Max: 5014 | Active: 200 | ERRORS: map[timeout:88]
+2026/04/08 14:22:41 [14:22:40] QPS: 4068.4 | Succ:  99.8% | Latency(ms) P50:  14 / P99:  20 / Max: 5015 | Active: 200 | ERRORS: map[timeout:77]
+2026/04/08 14:22:51 [14:22:50] QPS: 4077.0 | Succ:  99.7% | Latency(ms) P50:  14 / P99:  20 / Max: 5015 | Active: 200 | ERRORS: map[timeout:116]
+2026/04/08 14:23:01 [14:23:00] QPS: 4045.4 | Succ:  99.8% | Latency(ms) P50:  14 / P99:  20 / Max: 5017 | Active: 200 | ERRORS: map[timeout:93]
+2026/04/08 14:23:11 [14:23:10] QPS: 8080.7 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   37 | Active: 200
+2026/04/08 14:23:21 [14:23:20] QPS: 8103.7 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  21 / Max:   28 | Active: 200
+2026/04/08 14:23:31 [14:23:30] QPS: 4096.3 | Succ:  99.7% | Latency(ms) P50:  14 / P99:  20 / Max: 5015 | Active: 200 | ERRORS: map[timeout:111]
+2026/04/08 14:23:41 [14:23:40] QPS: 4030.3 | Succ:  99.7% | Latency(ms) P50:  14 / P99:  21 / Max: 5013 | Active: 200 | ERRORS: map[timeout:121]
+2026/04/08 14:23:51 [14:23:50] QPS: 4025.3 | Succ:  99.8% | Latency(ms) P50:  14 / P99:  20 / Max: 5014 | Active: 200 | ERRORS: map[timeout:96]
+2026/04/08 14:24:01 [14:24:00] QPS: 4368.0 | Succ:  99.8% | Latency(ms) P50:  14 / P99:  22 / Max: 5015 | Active: 200 | ERRORS: map[timeout:87]
+2026/04/08 14:24:11 [14:24:10] QPS: 4092.5 | Succ:  99.7% | Latency(ms) P50:  14 / P99:  20 / Max: 5012 | Active: 200 | ERRORS: map[timeout:133]
+2026/04/08 14:24:21 [14:24:20] QPS: 7605.3 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  22 / Max:   38 | Active: 200
+2026/04/08 14:24:31 [14:24:30] QPS: 1738.2 | Succ:  99.8% | Latency(ms) P50:  14 / P99:  23 / Max: 5015 | Active: 200 | ERRORS: map[timeout:30]
+2026/04/08 14:24:41 [14:24:30] QPS:  20.0 | Succ:  57.0% | Latency(ms) P50: 5011 / P99: 5016 / Max: 5017 | Active: 200 | ERRORS: map[timeout:86]
+2026/04/08 14:24:41 [14:24:40] QPS: 6344.3 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   26 | Active: 200
+2026/04/08 14:24:51 [14:24:50] QPS: 1933.1 | Succ:  99.2% | Latency(ms) P50:  14 / P99:  19 / Max: 5013 | Active: 200 | ERRORS: map[timeout:154]
+2026/04/08 14:25:01 [14:24:50] QPS:  20.0 | Succ:  81.5% | Latency(ms) P50: 5009 / P99: 5016 / Max: 5017 | Active: 200 | ERRORS: map[timeout:37]
+2026/04/08 14:25:01 [14:25:00] QPS: 6006.6 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   23 | Active: 200
+2026/04/08 14:25:11 [14:25:00] QPS:  20.0 | Succ:  38.5% | Latency(ms) P50: 5006 / P99: 5016 / Max: 5016 | Active: 200 | ERRORS: map[timeout:123]
+2026/04/08 14:25:11 [14:25:10] QPS: 4190.5 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   25 | Active: 200
+2026/04/08 14:25:21 [14:25:20] QPS: 4014.0 | Succ:  99.6% | Latency(ms) P50:  14 / P99:  21 / Max: 5012 | Active: 200 | ERRORS: map[timeout:165]
+2026/04/08 14:25:31 [14:25:30] QPS: 4087.0 | Succ:  99.8% | Latency(ms) P50:  14 / P99:  19 / Max: 5016 | Active: 200 | ERRORS: map[timeout:81]
+2026/04/08 14:25:41 [14:25:40] QPS: 4274.1 | Succ:  99.8% | Latency(ms) P50:  14 / P99:  21 / Max: 5015 | Active: 200 | ERRORS: map[timeout:66]
+2026/04/08 14:25:51 [14:25:50] QPS: 3856.1 | Succ:  99.8% | Latency(ms) P50:  14 / P99:  20 / Max: 5014 | Active: 200 | ERRORS: map[timeout:80]
+2026/04/08 14:26:01 [14:26:00] QPS: 5441.5 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  21 / Max:   29 | Active: 200
+2026/04/08 14:26:11 [14:26:00] QPS:  20.0 | Succ:  50.0% | Latency(ms) P50: 5010 / P99: 5014 / Max: 5014 | Active: 200 | ERRORS: map[timeout:100]
+2026/04/08 14:26:11 [14:26:10] QPS: 2659.0 | Succ:  99.5% | Latency(ms) P50:  14 / P99:  20 / Max: 5014 | Active: 200 | ERRORS: map[timeout:137]
+2026/04/08 14:26:21 [14:26:20] QPS: 7833.5 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  25 / Max:   35 | Active: 200
+2026/04/08 14:26:31 [14:26:30] QPS: 5396.6 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   27 | Active: 200
+2026/04/08 14:26:41 [14:26:30] QPS:  20.0 | Succ:  60.0% | Latency(ms) P50: 5006 / P99: 5014 / Max: 5014 | Active: 200 | ERRORS: map[timeout:80]
+2026/04/08 14:26:41 [14:26:40] QPS: 4313.7 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   33 | Active: 200
+2026/04/08 14:26:51 [14:26:40] QPS:  20.0 | Succ:  45.5% | Latency(ms) P50: 5011 / P99: 5016 / Max: 5016 | Active: 200 | ERRORS: map[timeout:109]
+2026/04/08 14:26:51 [14:26:50] QPS: 2878.6 | Succ:  99.7% | Latency(ms) P50:  14 / P99:  19 / Max: 5015 | Active: 200 | ERRORS: map[timeout:76]
+2026/04/08 14:27:01 [14:27:00] QPS: 3526.7 | Succ:  99.6% | Latency(ms) P50:  14 / P99:  22 / Max: 5014 | Active: 200 | ERRORS: map[timeout:155]
+2026/04/08 14:27:11 [14:27:10] QPS: 4483.7 | Succ:  99.8% | Latency(ms) P50:  14 / P99:  22 / Max: 5015 | Active: 200 | ERRORS: map[timeout:80]
+2026/04/08 14:27:11 [14:27:20] QPS: 486.2 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  24 / Max:   26 | Active: 0
+2026/04/08 14:27:11 📊 [POST-BENCHMARK] DB Stats -> max_connections: 16000, Max_used_connections: 573
+2026/04/08 14:27:11 Stress test completed. Aggregates in results/qps8000_healthy/aggregate.jsonl, errors in results/qps8000_healthy/error.jsonl
+📊 Generating plot for healthy...
+Plot successfully saved to results/qps8000_healthy/plot.png
+✅ Success: Results saved in results/qps8000_healthy
+
+⏳ Waiting 30s for environment to settle before next scenario...
+
+🚀 Phase: QPS 8000 - Congested Case
+   Parameters: -concurrency 480, -sleep_between_attempts 30ms
+2026/04/08 14:27:42 Starting stress test v2 against database-connectivity-instance1-cluster.cluster-c9eaw8m4yzeq.ap-northeast-1.rds.amazonaws.com:3306
+2026/04/08 14:27:42 Run ID: run-1775658462, Base Concurrency: 480, Duration: 5m0s, Window: 10s
+2026/04/08 14:27:42 📊 [PRE-BENCHMARK] DB Stats -> max_connections: 16000, Max_used_connections: 573
+2026/04/08 14:27:52 [14:27:50] QPS: 4893.9 | Succ:  99.5% | Latency(ms) P50:  14 / P99:  61 / Max: 5020 | Active: 480 | ERRORS: map[timeout:242]
+2026/04/08 14:28:02 [14:28:00] QPS: 8013.0 | Succ: 100.0% | Latency(ms) P50:  18 / P99:  26 / Max:   37 | Active: 480
+2026/04/08 14:28:12 [14:28:10] QPS: 7169.5 | Succ:  99.7% | Latency(ms) P50:  14 / P99:  21 / Max: 5021 | Active: 480 | ERRORS: map[timeout:194]
+2026/04/08 14:28:22 [14:28:20] QPS: 7460.8 | Succ: 100.0% | Latency(ms) P50:  16 / P99:  30 / Max:   36 | Active: 480
+2026/04/08 14:28:32 [14:28:20] QPS:  48.0 | Succ:  67.1% | Latency(ms) P50: 5015 / P99: 5022 / Max: 5022 | Active: 480 | ERRORS: map[timeout:158]
+2026/04/08 14:28:32 [14:28:30] QPS: 5483.9 | Succ: 100.0% | Latency(ms) P50:  18 / P99:  28 / Max:   31 | Active: 480
+2026/04/08 14:28:42 [14:28:40] QPS: 10316.3 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  27 / Max:   43 | Active: 480
+2026/04/08 14:28:52 [14:28:50] QPS: 10747.3 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   32 | Active: 480
+2026/04/08 14:29:02 [14:29:00] QPS: 10278.8 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  23 / Max:   32 | Active: 480
+2026/04/08 14:29:12 [14:29:10] QPS: 10505.6 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  22 / Max:   30 | Active: 480
+2026/04/08 14:29:22 [14:29:20] QPS: 8384.5 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  22 / Max:   33 | Active: 480
+2026/04/08 14:29:32 [14:29:20] QPS:  48.0 | Succ:  66.0% | Latency(ms) P50: 5007 / P99: 5020 / Max: 5021 | Active: 480 | ERRORS: map[timeout:163]
+2026/04/08 14:29:32 [14:29:30] QPS: 7231.7 | Succ: 100.0% | Latency(ms) P50:  16 / P99:  26 / Max:   33 | Active: 480
+2026/04/08 14:29:42 [14:29:40] QPS: 7486.5 | Succ:  99.9% | Latency(ms) P50:  14 / P99:  22 / Max: 5024 | Active: 480 | ERRORS: map[timeout:98]
+2026/04/08 14:29:52 [14:29:50] QPS: 8098.9 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  28 / Max:   32 | Active: 480
+2026/04/08 14:30:02 [14:30:00] QPS: 10532.5 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  23 / Max:   31 | Active: 480
+2026/04/08 14:30:12 [14:30:10] QPS: 7978.6 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  21 / Max:   26 | Active: 480
+2026/04/08 14:30:22 [14:30:10] QPS:  48.0 | Succ:  56.2% | Latency(ms) P50: 5008 / P99: 5021 / Max: 5022 | Active: 480 | ERRORS: map[timeout:210]
+2026/04/08 14:30:22 [14:30:20] QPS: 7285.5 | Succ: 100.0% | Latency(ms) P50:  17 / P99:  30 / Max:   38 | Active: 480
+2026/04/08 14:30:32 [14:30:30] QPS: 9718.8 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  22 / Max:   27 | Active: 480
+2026/04/08 14:30:42 [14:30:30] QPS:  48.0 | Succ:  84.6% | Latency(ms) P50: 5009 / P99: 5026 / Max: 5029 | Active: 480 | ERRORS: map[timeout:74]
+2026/04/08 14:30:42 [14:30:40] QPS: 5785.6 | Succ: 100.0% | Latency(ms) P50:  17 / P99:  28 / Max:   31 | Active: 480
+2026/04/08 14:30:52 [14:30:50] QPS: 6532.8 | Succ:  99.6% | Latency(ms) P50:  14 / P99:  21 / Max: 5019 | Active: 480 | ERRORS: map[timeout:281]
+2026/04/08 14:31:02 [14:31:00] QPS: 4000.2 | Succ:  99.5% | Latency(ms) P50:  14 / P99:  28 / Max: 5021 | Active: 480 | ERRORS: map[timeout:203]
+2026/04/08 14:31:12 [14:31:10] QPS: 10097.6 | Succ: 100.0% | Latency(ms) P50:  16 / P99:  26 / Max:   31 | Active: 480
+2026/04/08 14:31:22 [14:31:20] QPS: 10438.7 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  24 / Max:   31 | Active: 480
+2026/04/08 14:31:32 [14:31:30] QPS: 10414.2 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  23 / Max:   34 | Active: 480
+2026/04/08 14:31:42 [14:31:40] QPS: 10633.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  21 / Max:   33 | Active: 480
+2026/04/08 14:31:52 [14:31:50] QPS: 9594.7 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  22 / Max:   37 | Active: 480
+2026/04/08 14:32:02 [14:31:50] QPS:  48.0 | Succ:  48.1% | Latency(ms) P50: 5005 / P99: 5018 / Max: 5018 | Active: 480 | ERRORS: map[timeout:249]
+2026/04/08 14:32:02 [14:32:00] QPS: 6254.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  21 / Max:   27 | Active: 480
+2026/04/08 14:32:12 [14:32:10] QPS: 10430.8 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  22 / Max:   29 | Active: 480
+2026/04/08 14:32:22 [14:32:20] QPS: 9203.4 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  21 / Max:   32 | Active: 480
+2026/04/08 14:32:32 [14:32:20] QPS:  48.0 | Succ:  91.2% | Latency(ms) P50: 5018 / P99: 5026 / Max: 5029 | Active: 480 | ERRORS: map[timeout:42]
+2026/04/08 14:32:32 [14:32:30] QPS: 6093.7 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  34 / Max:   38 | Active: 480
+2026/04/08 14:32:42 [14:32:40] QPS: 7149.1 | Succ:  99.8% | Latency(ms) P50:  14 / P99:  21 / Max: 5025 | Active: 480 | ERRORS: map[timeout:113]
+2026/04/08 14:32:42 [14:32:50] QPS: 353.5 | Succ:  99.9% | Latency(ms) P50:  25 / P99:  29 / Max:   30 | Active: 0 | ERRORS: map[timeout:3]
+2026/04/08 14:32:42 📊 [POST-BENCHMARK] DB Stats -> max_connections: 16000, Max_used_connections: 619
+2026/04/08 14:32:42 Stress test completed. Aggregates in results/qps8000_congested/aggregate.jsonl, errors in results/qps8000_congested/error.jsonl
+📊 Generating plot for congested...
+Plot successfully saved to results/qps8000_congested/plot.png
+✅ Success: Results saved in results/qps8000_congested
+
+⏳ Waiting 30s for environment to settle before next scenario...
+
+🚀 Phase: QPS 9000 - Healthy Case
+   Parameters: -concurrency 225, -sleep_between_attempts 10ms
+2026/04/08 14:33:12 Starting stress test v2 against database-connectivity-instance1-cluster.cluster-c9eaw8m4yzeq.ap-northeast-1.rds.amazonaws.com:3306
+2026/04/08 14:33:12 Run ID: run-1775658792, Base Concurrency: 225, Duration: 5m0s, Window: 10s
+2026/04/08 14:33:12 📊 [PRE-BENCHMARK] DB Stats -> max_connections: 16000, Max_used_connections: 619
+2026/04/08 14:33:22 [14:33:20] QPS: 6222.1 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  21 / Max:   52 | Active: 225
+2026/04/08 14:33:32 [14:33:30] QPS: 4553.8 | Succ:  99.9% | Latency(ms) P50:  14 / P99:  22 / Max: 5014 | Active: 225 | ERRORS: map[timeout:42]
+2026/04/08 14:33:42 [14:33:40] QPS: 8920.6 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  21 / Max:   29 | Active: 225
+2026/04/08 14:33:52 [14:33:50] QPS: 4415.9 | Succ:  99.6% | Latency(ms) P50:  14 / P99:  21 / Max: 5012 | Active: 225 | ERRORS: map[timeout:194]
+2026/04/08 14:34:02 [14:34:00] QPS: 6545.8 | Succ:  99.8% | Latency(ms) P50:  14 / P99:  22 / Max: 5014 | Active: 225 | ERRORS: map[timeout:100]
+2026/04/08 14:34:12 [14:34:10] QPS: 6959.2 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   27 | Active: 225
+2026/04/08 14:34:22 [14:34:20] QPS: 4187.1 | Succ:  99.7% | Latency(ms) P50:  17 / P99:  23 / Max: 5014 | Active: 225 | ERRORS: map[timeout:123]
+2026/04/08 14:34:32 [14:34:30] QPS: 5436.0 | Succ:  99.7% | Latency(ms) P50:  14 / P99:  21 / Max: 5018 | Active: 225 | ERRORS: map[timeout:174]
+2026/04/08 14:34:42 [14:34:40] QPS: 7266.8 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   24 | Active: 225
+2026/04/08 14:34:52 [14:34:40] QPS:  22.5 | Succ:  34.2% | Latency(ms) P50: 5010 / P99: 5012 / Max: 5012 | Active: 225 | ERRORS: map[timeout:148]
+2026/04/08 14:34:52 [14:34:50] QPS: 4243.7 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   26 | Active: 225
+2026/04/08 14:35:02 [14:34:50] QPS:  22.5 | Succ:  51.1% | Latency(ms) P50: 5006 / P99: 5014 / Max: 5015 | Active: 225 | ERRORS: map[timeout:110]
+2026/04/08 14:35:02 [14:35:00] QPS: 3453.9 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  21 / Max:   28 | Active: 225
+2026/04/08 14:35:12 [14:35:00] QPS:  22.5 | Succ:  39.6% | Latency(ms) P50: 5011 / P99: 5016 / Max: 5016 | Active: 225 | ERRORS: map[timeout:136]
+2026/04/08 14:35:12 [14:35:10] QPS: 6118.5 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  22 / Max:   27 | Active: 225
+2026/04/08 14:35:22 [14:35:20] QPS: 9044.8 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   31 | Active: 225
+2026/04/08 14:35:32 [14:35:30] QPS: 4524.4 | Succ:  99.7% | Latency(ms) P50:  14 / P99:  19 / Max: 5013 | Active: 225 | ERRORS: map[timeout:125]
+2026/04/08 14:35:42 [14:35:40] QPS: 4457.9 | Succ:  99.9% | Latency(ms) P50:  14 / P99:  22 / Max: 5017 | Active: 225 | ERRORS: map[timeout:32]
+2026/04/08 14:35:52 [14:35:50] QPS: 4537.3 | Succ:  99.9% | Latency(ms) P50:  14 / P99:  20 / Max: 5016 | Active: 225 | ERRORS: map[timeout:67]
+2026/04/08 14:36:02 [14:36:00] QPS: 8769.4 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  22 / Max:   33 | Active: 225
+2026/04/08 14:36:12 [14:36:00] QPS:  22.5 | Succ:  55.6% | Latency(ms) P50: 5007 / P99: 5016 / Max: 5016 | Active: 225 | ERRORS: map[timeout:100]
+2026/04/08 14:36:12 [14:36:10] QPS: 4185.5 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   23 | Active: 225
+2026/04/08 14:36:22 [14:36:10] QPS:  22.5 | Succ:  56.0% | Latency(ms) P50: 5008 / P99: 5014 / Max: 5015 | Active: 225 | ERRORS: map[timeout:99]
+2026/04/08 14:36:22 [14:36:20] QPS: 4806.6 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  22 / Max:   26 | Active: 225
+2026/04/08 14:36:32 [14:36:30] QPS: 8929.9 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  22 / Max:   37 | Active: 225
+2026/04/08 14:36:42 [14:36:40] QPS: 8967.9 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   30 | Active: 225
+2026/04/08 14:36:52 [14:36:50] QPS: 4614.2 | Succ:  99.9% | Latency(ms) P50:  13 / P99:  20 / Max: 5022 | Active: 225 | ERRORS: map[timeout:69]
+2026/04/08 14:37:02 [14:37:00] QPS: 4454.3 | Succ:  99.7% | Latency(ms) P50:  14 / P99:  24 / Max: 5014 | Active: 225 | ERRORS: map[timeout:128]
+2026/04/08 14:37:12 [14:37:10] QPS: 6857.0 | Succ:  99.8% | Latency(ms) P50:  14 / P99:  22 / Max: 5015 | Active: 225 | ERRORS: map[timeout:134]
+2026/04/08 14:37:22 [14:37:20] QPS: 6460.1 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  21 / Max:   35 | Active: 225
+2026/04/08 14:37:32 [14:37:30] QPS: 4600.1 | Succ:  99.7% | Latency(ms) P50:  14 / P99:  20 / Max: 5015 | Active: 225 | ERRORS: map[timeout:120]
+2026/04/08 14:37:42 [14:37:40] QPS: 4515.2 | Succ:  99.9% | Latency(ms) P50:  14 / P99:  20 / Max: 5015 | Active: 225 | ERRORS: map[timeout:61]
+2026/04/08 14:37:52 [14:37:50] QPS: 5571.7 | Succ:  99.7% | Latency(ms) P50:  14 / P99:  22 / Max: 5015 | Active: 225 | ERRORS: map[timeout:186]
+2026/04/08 14:38:02 [14:38:00] QPS: 5360.0 | Succ:  99.8% | Latency(ms) P50:  14 / P99:  21 / Max: 5015 | Active: 225 | ERRORS: map[timeout:124]
+2026/04/08 14:38:12 [14:38:10] QPS: 7103.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  20 / Max:   26 | Active: 225
+2026/04/08 14:38:12 [14:38:20] QPS: 270.0 | Succ: 100.0% | Latency(ms) P50:  13 / P99:  15 / Max:   18 | Active: 0
+2026/04/08 14:38:15 📊 [POST-BENCHMARK] DB Stats -> max_connections: 16000, Max_used_connections: 619
+2026/04/08 14:38:15 Stress test completed. Aggregates in results/qps9000_healthy/aggregate.jsonl, errors in results/qps9000_healthy/error.jsonl
+📊 Generating plot for healthy...
+Plot successfully saved to results/qps9000_healthy/plot.png
+✅ Success: Results saved in results/qps9000_healthy
+
+⏳ Waiting 30s for environment to settle before next scenario...
+
+🚀 Phase: QPS 9000 - Congested Case
+   Parameters: -concurrency 540, -sleep_between_attempts 30ms
+2026/04/08 14:38:46 Starting stress test v2 against database-connectivity-instance1-cluster.cluster-c9eaw8m4yzeq.ap-northeast-1.rds.amazonaws.com:3306
+2026/04/08 14:38:46 Run ID: run-1775659126, Base Concurrency: 540, Duration: 5m0s, Window: 10s
+2026/04/08 14:38:46 📊 [PRE-BENCHMARK] DB Stats -> max_connections: 16000, Max_used_connections: 619
+2026/04/08 14:38:56 [14:38:50] QPS: 4350.1 | Succ:  99.6% | Latency(ms) P50:  15 / P99:  77 / Max: 5026 | Active: 540 | ERRORS: map[timeout:163]
+2026/04/08 14:39:06 [14:39:00] QPS: 5480.2 | Succ:  99.5% | Latency(ms) P50:  16 / P99:  30 / Max: 5020 | Active: 540 | ERRORS: map[timeout:285]
+2026/04/08 14:39:16 [14:39:10] QPS: 6010.1 | Succ: 100.0% | Latency(ms) P50:  17 / P99:  25 / Max:   36 | Active: 540
+2026/04/08 14:39:26 [14:39:20] QPS: 11372.6 | Succ: 100.0% | Latency(ms) P50:  16 / P99:  26 / Max:   33 | Active: 540
+2026/04/08 14:39:36 [14:39:30] QPS: 11644.7 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  23 / Max:   33 | Active: 540
+2026/04/08 14:39:46 [14:39:40] QPS: 11899.9 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  21 / Max:   32 | Active: 540
+2026/04/08 14:39:56 [14:39:50] QPS: 10893.2 | Succ:  99.9% | Latency(ms) P50:  14 / P99:  23 / Max: 5026 | Active: 540 | ERRORS: map[timeout:114]
+2026/04/08 14:40:06 [14:40:00] QPS: 6286.7 | Succ: 100.0% | Latency(ms) P50:  19 / P99:  29 / Max:   34 | Active: 540
+2026/04/08 14:40:16 [14:40:10] QPS: 11793.2 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  22 / Max:   31 | Active: 540
+2026/04/08 14:40:26 [14:40:20] QPS: 12032.7 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  21 / Max:   29 | Active: 540
+2026/04/08 14:40:36 [14:40:30] QPS: 11110.1 | Succ:  99.9% | Latency(ms) P50:  14 / P99:  21 / Max: 5031 | Active: 540 | ERRORS: map[timeout:99]
+2026/04/08 14:40:46 [14:40:40] QPS: 6029.6 | Succ: 100.0% | Latency(ms) P50:  19 / P99:  36 / Max:   42 | Active: 540
+2026/04/08 14:40:56 [14:40:50] QPS: 11575.0 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  25 / Max:   31 | Active: 540
+2026/04/08 14:41:06 [14:41:00] QPS: 11758.5 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  22 / Max:   34 | Active: 540
+2026/04/08 14:41:16 [14:41:10] QPS: 12054.3 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   39 | Active: 540
+2026/04/08 14:41:26 [14:41:20] QPS: 12028.8 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   29 | Active: 540
+2026/04/08 14:41:36 [14:41:30] QPS: 5603.2 | Succ:  99.6% | Latency(ms) P50:  17 / P99:  29 / Max: 5020 | Active: 540 | ERRORS: map[timeout:222]
+2026/04/08 14:41:46 [14:41:40] QPS: 5791.2 | Succ:  99.6% | Latency(ms) P50:  14 / P99:  31 / Max: 5025 | Active: 540 | ERRORS: map[timeout:230]
+2026/04/08 14:41:56 [14:41:50] QPS: 7908.1 | Succ:  99.6% | Latency(ms) P50:  16 / P99:  25 / Max: 5019 | Active: 540 | ERRORS: map[timeout:332]
+2026/04/08 14:42:06 [14:42:00] QPS: 9119.0 | Succ: 100.0% | Latency(ms) P50:  17 / P99:  26 / Max:   31 | Active: 540
+2026/04/08 14:42:16 [14:42:10] QPS: 10681.2 | Succ:  99.8% | Latency(ms) P50:  14 / P99:  21 / Max: 5024 | Active: 540 | ERRORS: map[timeout:264]
+2026/04/08 14:42:26 [14:42:20] QPS: 6995.7 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  26 / Max:   40 | Active: 540
+2026/04/08 14:42:36 [14:42:30] QPS: 5553.6 | Succ:  99.7% | Latency(ms) P50:  17 / P99:  32 / Max: 5025 | Active: 540 | ERRORS: map[timeout:178]
+2026/04/08 14:42:46 [14:42:40] QPS: 7251.2 | Succ:  99.5% | Latency(ms) P50:  15 / P99:  22 / Max: 5019 | Active: 540 | ERRORS: map[timeout:328]
+2026/04/08 14:42:56 [14:42:50] QPS: 9688.1 | Succ: 100.0% | Latency(ms) P50:  18 / P99:  29 / Max:   35 | Active: 540
+2026/04/08 14:43:06 [14:43:00] QPS: 6918.0 | Succ:  99.7% | Latency(ms) P50:  14 / P99:  26 / Max: 5021 | Active: 540 | ERRORS: map[timeout:188]
+2026/04/08 14:43:16 [14:43:10] QPS: 10135.9 | Succ: 100.0% | Latency(ms) P50:  16 / P99:  29 / Max:   41 | Active: 540
+2026/04/08 14:43:26 [14:43:20] QPS: 11885.6 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  23 / Max:   31 | Active: 540
+2026/04/08 14:43:36 [14:43:30] QPS: 6567.4 | Succ:  99.8% | Latency(ms) P50:  14 / P99:  21 / Max: 5032 | Active: 540 | ERRORS: map[timeout:117]
+2026/04/08 14:43:46 [14:43:40] QPS: 10887.1 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  29 / Max:   37 | Active: 540
+2026/04/08 14:43:46 [14:43:50] QPS: 7034.8 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  24 / Max:   32 | Active: 0 | ERRORS: map[timeout:4]
+2026/04/08 14:43:46 📊 [POST-BENCHMARK] DB Stats -> max_connections: 16000, Max_used_connections: 718
+2026/04/08 14:43:46 Stress test completed. Aggregates in results/qps9000_congested/aggregate.jsonl, errors in results/qps9000_congested/error.jsonl
+📊 Generating plot for congested...
+Plot successfully saved to results/qps9000_congested/plot.png
+✅ Success: Results saved in results/qps9000_congested
+
+⏳ Waiting 30s for environment to settle before next scenario...
+
+🚀 Phase: QPS 10000 - Healthy Case
+   Parameters: -concurrency 250, -sleep_between_attempts 10ms
+2026/04/08 14:44:16 Starting stress test v2 against database-connectivity-instance1-cluster.cluster-c9eaw8m4yzeq.ap-northeast-1.rds.amazonaws.com:3306
+2026/04/08 14:44:16 Run ID: run-1775659456, Base Concurrency: 250, Duration: 5m0s, Window: 10s
+2026/04/08 14:44:16 📊 [PRE-BENCHMARK] DB Stats -> max_connections: 16000, Max_used_connections: 718
+2026/04/08 14:44:26 [14:44:20] QPS: 2800.2 | Succ:  99.7% | Latency(ms) P50:  14 / P99:  54 / Max: 5016 | Active: 250 | ERRORS: map[timeout:88]
+2026/04/08 14:44:36 [14:44:30] QPS: 4959.3 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  23 / Max:   26 | Active: 250
+2026/04/08 14:44:46 [14:44:40] QPS: 4997.6 | Succ:  99.6% | Latency(ms) P50:  14 / P99:  21 / Max: 5013 | Active: 250 | ERRORS: map[timeout:177]
+2026/04/08 14:44:56 [14:44:50] QPS: 6694.9 | Succ:  99.8% | Latency(ms) P50:  14 / P99:  21 / Max: 5014 | Active: 250 | ERRORS: map[timeout:150]
+2026/04/08 14:45:06 [14:45:00] QPS: 6841.9 | Succ:  99.8% | Latency(ms) P50:  14 / P99:  22 / Max: 5014 | Active: 250 | ERRORS: map[timeout:146]
+2026/04/08 14:45:16 [14:45:10] QPS: 6257.8 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  21 / Max:   31 | Active: 250
+2026/04/08 14:45:26 [14:45:20] QPS: 3757.2 | Succ:  99.1% | Latency(ms) P50:  14 / P99:  21 / Max: 5017 | Active: 250 | ERRORS: map[timeout:349]
+2026/04/08 14:45:36 [14:45:30] QPS: 5746.8 | Succ: 100.0% | Latency(ms) P50:  16 / P99:  21 / Max:   27 | Active: 250
+2026/04/08 14:45:46 [14:45:40] QPS: 6068.0 | Succ:  99.6% | Latency(ms) P50:  14 / P99:  21 / Max: 5011 | Active: 250 | ERRORS: map[timeout:235]
+2026/04/08 14:45:56 [14:45:50] QPS: 6948.1 | Succ:  99.9% | Latency(ms) P50:  15 / P99:  22 / Max: 5019 | Active: 250 | ERRORS: map[timeout:91]
+2026/04/08 14:46:06 [14:46:00] QPS: 6440.8 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  22 / Max:   26 | Active: 250
+2026/04/08 14:46:16 [14:46:10] QPS: 4544.6 | Succ:  99.4% | Latency(ms) P50:  14 / P99:  22 / Max: 5016 | Active: 250 | ERRORS: map[timeout:290]
+2026/04/08 14:46:26 [14:46:20] QPS: 5266.5 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  22 / Max:   29 | Active: 250
+2026/04/08 14:46:36 [14:46:30] QPS: 5014.2 | Succ:  99.8% | Latency(ms) P50:  14 / P99:  21 / Max: 5016 | Active: 250 | ERRORS: map[timeout:119]
+2026/04/08 14:46:46 [14:46:40] QPS: 9009.9 | Succ:  99.8% | Latency(ms) P50:  14 / P99:  20 / Max: 5015 | Active: 250 | ERRORS: map[timeout:155]
+2026/04/08 14:46:56 [14:46:50] QPS: 5080.9 | Succ:  99.8% | Latency(ms) P50:  14 / P99:  21 / Max: 5018 | Active: 250 | ERRORS: map[timeout:94]
+2026/04/08 14:47:06 [14:47:00] QPS: 5636.0 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  19 / Max:   27 | Active: 250
+2026/04/08 14:47:16 [14:47:10] QPS: 4960.4 | Succ:  99.7% | Latency(ms) P50:  14 / P99:  20 / Max: 5014 | Active: 250 | ERRORS: map[timeout:125]
+2026/04/08 14:47:26 [14:47:20] QPS: 6583.7 | Succ:  99.9% | Latency(ms) P50:  14 / P99:  24 / Max: 5018 | Active: 250 | ERRORS: map[timeout:51]
+2026/04/08 14:47:36 [14:47:30] QPS: 3202.3 | Succ:  99.7% | Latency(ms) P50:  14 / P99:  20 / Max: 5016 | Active: 250 | ERRORS: map[timeout:102]
+2026/04/08 14:47:46 [14:47:40] QPS: 4952.4 | Succ:  99.7% | Latency(ms) P50:  14 / P99:  21 / Max: 5013 | Active: 250 | ERRORS: map[timeout:136]
+2026/04/08 14:47:56 [14:47:50] QPS: 5416.4 | Succ:  99.7% | Latency(ms) P50:  14 / P99:  22 / Max: 5016 | Active: 250 | ERRORS: map[timeout:162]
+2026/04/08 14:48:06 [14:48:00] QPS: 5632.4 | Succ:  99.6% | Latency(ms) P50:  14 / P99:  22 / Max: 5016 | Active: 250 | ERRORS: map[timeout:214]
+2026/04/08 14:48:16 [14:48:10] QPS: 8605.3 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  21 / Max:   32 | Active: 250
+2026/04/08 14:48:26 [14:48:20] QPS: 4917.9 | Succ:  99.6% | Latency(ms) P50:  14 / P99:  21 / Max: 5014 | Active: 250 | ERRORS: map[timeout:195]
+2026/04/08 14:48:36 [14:48:30] QPS: 4818.2 | Succ:  99.9% | Latency(ms) P50:  14 / P99:  22 / Max: 5018 | Active: 250 | ERRORS: map[timeout:52]
+2026/04/08 14:48:46 [14:48:40] QPS: 4979.6 | Succ:  99.7% | Latency(ms) P50:  14 / P99:  20 / Max: 5015 | Active: 250 | ERRORS: map[timeout:157]
+2026/04/08 14:48:56 [14:48:50] QPS: 5556.7 | Succ:  99.7% | Latency(ms) P50:  14 / P99:  21 / Max: 5009 | Active: 250 | ERRORS: map[timeout:162]
+2026/04/08 14:49:06 [14:49:00] QPS: 6340.0 | Succ:  99.7% | Latency(ms) P50:  14 / P99:  23 / Max: 5016 | Active: 250 | ERRORS: map[timeout:193]
+2026/04/08 14:49:16 [14:49:10] QPS: 4912.6 | Succ:  99.7% | Latency(ms) P50:  14 / P99:  21 / Max: 5015 | Active: 242 | ERRORS: map[timeout:163]
+2026/04/08 14:49:16 [14:49:20] QPS: 4657.6 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  22 / Max:   29 | Active: 0
+2026/04/08 14:49:16 📊 [POST-BENCHMARK] DB Stats -> max_connections: 16000, Max_used_connections: 718
+2026/04/08 14:49:16 Stress test completed. Aggregates in results/qps10000_healthy/aggregate.jsonl, errors in results/qps10000_healthy/error.jsonl
+📊 Generating plot for healthy...
+Plot successfully saved to results/qps10000_healthy/plot.png
+✅ Success: Results saved in results/qps10000_healthy
+
+⏳ Waiting 30s for environment to settle before next scenario...
+
+🚀 Phase: QPS 10000 - Congested Case
+   Parameters: -concurrency 600, -sleep_between_attempts 30ms
+2026/04/08 14:49:47 Starting stress test v2 against database-connectivity-instance1-cluster.cluster-c9eaw8m4yzeq.ap-northeast-1.rds.amazonaws.com:3306
+2026/04/08 14:49:47 Run ID: run-1775659787, Base Concurrency: 600, Duration: 5m0s, Window: 10s
+2026/04/08 14:49:47 📊 [PRE-BENCHMARK] DB Stats -> max_connections: 16000, Max_used_connections: 718
+2026/04/08 14:49:57 [14:49:50] QPS: 2470.2 | Succ: 100.0% | Latency(ms) P50:  26 / P99:  90 / Max:  102 | Active: 600
+2026/04/08 14:50:07 [14:50:00] QPS: 11764.2 | Succ:  99.9% | Latency(ms) P50:  16 / P99:  31 / Max: 5034 | Active: 600 | ERRORS: map[timeout:106]
+2026/04/08 14:50:17 [14:50:10] QPS: 6556.3 | Succ: 100.0% | Latency(ms) P50:  18 / P99:  33 / Max:   45 | Active: 600
+2026/04/08 14:50:27 [14:50:20] QPS: 11705.9 | Succ:  99.9% | Latency(ms) P50:  14 / P99:  22 / Max: 5041 | Active: 600 | ERRORS: map[timeout:76]
+2026/04/08 14:50:37 [14:50:30] QPS: 5475.3 | Succ:  99.8% | Latency(ms) P50:  16 / P99:  37 / Max: 5035 | Active: 600 | ERRORS: map[timeout:132]
+2026/04/08 14:50:47 [14:50:40] QPS: 8221.5 | Succ: 100.0% | Latency(ms) P50:  17 / P99:  35 / Max:   43 | Active: 600
+2026/04/08 14:50:57 [14:50:50] QPS: 6218.6 | Succ:  99.7% | Latency(ms) P50:  16 / P99:  32 / Max: 5029 | Active: 600 | ERRORS: map[timeout:176]
+2026/04/08 14:51:07 [14:51:00] QPS: 8775.7 | Succ:  99.7% | Latency(ms) P50:  15 / P99:  29 / Max: 5025 | Active: 600 | ERRORS: map[timeout:273]
+2026/04/08 14:51:17 [14:51:10] QPS: 9953.7 | Succ: 100.0% | Latency(ms) P50:  18 / P99:  28 / Max:   33 | Active: 600
+2026/04/08 14:51:27 [14:51:20] QPS: 7901.6 | Succ:  99.6% | Latency(ms) P50:  14 / P99:  22 / Max: 5022 | Active: 600 | ERRORS: map[timeout:307]
+2026/04/08 14:51:37 [14:51:30] QPS: 8237.0 | Succ:  99.6% | Latency(ms) P50:  15 / P99:  28 / Max: 5020 | Active: 600 | ERRORS: map[timeout:355]
+2026/04/08 14:51:47 [14:51:40] QPS: 9311.9 | Succ: 100.0% | Latency(ms) P50:  18 / P99:  30 / Max:   35 | Active: 600
+2026/04/08 14:51:57 [14:51:50] QPS: 6032.4 | Succ:  99.6% | Latency(ms) P50:  19 / P99:  33 / Max: 5028 | Active: 600 | ERRORS: map[timeout:234]
+2026/04/08 14:52:07 [14:52:00] QPS: 6968.0 | Succ:  99.7% | Latency(ms) P50:  16 / P99:  32 / Max: 5022 | Active: 600 | ERRORS: map[timeout:215]
+2026/04/08 14:52:17 [14:52:10] QPS: 7696.1 | Succ:  99.8% | Latency(ms) P50:  16 / P99:  39 / Max: 5030 | Active: 600 | ERRORS: map[timeout:180]
+2026/04/08 14:52:27 [14:52:20] QPS: 9923.8 | Succ: 100.0% | Latency(ms) P50:  18 / P99:  31 / Max:   37 | Active: 600
+2026/04/08 14:52:37 [14:52:30] QPS: 7113.5 | Succ:  99.6% | Latency(ms) P50:  15 / P99:  31 / Max: 5026 | Active: 600 | ERRORS: map[timeout:256]
+2026/04/08 14:52:47 [14:52:40] QPS: 8134.5 | Succ:  99.7% | Latency(ms) P50:  15 / P99:  30 / Max: 5025 | Active: 600 | ERRORS: map[timeout:259]
+2026/04/08 14:52:57 [14:52:50] QPS: 10326.5 | Succ:  99.9% | Latency(ms) P50:  16 / P99:  31 / Max: 5035 | Active: 600 | ERRORS: map[timeout:131]
+2026/04/08 14:53:07 [14:53:00] QPS: 5986.8 | Succ: 100.0% | Latency(ms) P50:  19 / P99:  33 / Max:   37 | Active: 600
+2026/04/08 14:53:17 [14:53:10] QPS: 11019.5 | Succ:  99.7% | Latency(ms) P50:  14 / P99:  23 / Max: 5022 | Active: 600 | ERRORS: map[timeout:284]
+2026/04/08 14:53:27 [14:53:20] QPS: 8087.2 | Succ:  99.9% | Latency(ms) P50:  16 / P99:  28 / Max: 5036 | Active: 600 | ERRORS: map[timeout:116]
+2026/04/08 14:53:37 [14:53:30] QPS: 4385.8 | Succ:  99.5% | Latency(ms) P50:  18 / P99:  31 / Max: 5013 | Active: 600 | ERRORS: map[timeout:230]
+2026/04/08 14:53:47 [14:53:40] QPS: 8136.8 | Succ: 100.0% | Latency(ms) P50:  18 / P99:  31 / Max:   34 | Active: 600
+2026/04/08 14:53:57 [14:53:50] QPS: 6408.1 | Succ:  99.6% | Latency(ms) P50:  15 / P99:  26 / Max: 5022 | Active: 600 | ERRORS: map[timeout:281]
+2026/04/08 14:54:07 [14:54:00] QPS: 10548.7 | Succ:  99.9% | Latency(ms) P50:  15 / P99:  27 / Max: 5033 | Active: 600 | ERRORS: map[timeout:135]
+2026/04/08 14:54:17 [14:54:10] QPS: 8340.5 | Succ: 100.0% | Latency(ms) P50:  16 / P99:  31 / Max:   35 | Active: 600
+2026/04/08 14:54:27 [14:54:20] QPS: 6102.1 | Succ:  99.3% | Latency(ms) P50:  18 / P99:  32 / Max: 5016 | Active: 600 | ERRORS: map[timeout:410]
+2026/04/08 14:54:37 [14:54:30] QPS: 13105.8 | Succ: 100.0% | Latency(ms) P50:  14 / P99:  23 / Max:   36 | Active: 600
+2026/04/08 14:54:47 [14:54:40] QPS: 6590.7 | Succ:  99.6% | Latency(ms) P50:  14 / P99:  25 / Max: 5023 | Active: 600 | ERRORS: map[timeout:277]
+2026/04/08 14:54:47 [14:54:50] QPS: 9870.2 | Succ: 100.0% | Latency(ms) P50:  15 / P99:  27 / Max:   31 | Active: 0 | ERRORS: map[timeout:9]
+2026/04/08 14:54:47 📊 [POST-BENCHMARK] DB Stats -> max_connections: 16000, Max_used_connections: 800
+2026/04/08 14:54:47 Stress test completed. Aggregates in results/qps10000_congested/aggregate.jsonl, errors in results/qps10000_congested/error.jsonl
+📊 Generating plot for congested...
+Plot successfully saved to results/qps10000_congested/plot.png
+✅ Success: Results saved in results/qps10000_congested
+
+✨ All 20 tests completed!
